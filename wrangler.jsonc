@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "boxitup-storage",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-06-01",
+  // Required by the OpenNext Cloudflare adapter (Next.js runs on the Node-compat runtime).
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+
+  // ── Future portal bindings ───────────────────────────────────────────────
+  // Uncomment and fill in IDs once created with the Cloudflare CLI.
+  //
+  // D1 database (CRM / customers / signups):
+  //   npx wrangler d1 create boxitup-crm
+  // "d1_databases": [
+  //   { "binding": "DB", "database_name": "boxitup-crm", "database_id": "<id>" }
+  // ],
+  //
+  // R2 bucket (uploaded media / documents):
+  //   npx wrangler r2 bucket create boxitup-media
+  // "r2_buckets": [
+  //   { "binding": "MEDIA", "bucket_name": "boxitup-media" }
+  // ],
+  //
+  // Secrets (set with `npx wrangler secret put <NAME>`), e.g. STRIPE_SECRET_KEY.
+}
