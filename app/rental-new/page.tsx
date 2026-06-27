@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { HERO } from "@/lib/content";
+import { getContent } from "@/lib/cms";
 import { JsonLd, breadcrumbSchema } from "@/components/JsonLd";
 import { Hero } from "@/components/Hero";
 import { MainSections } from "@/components/MainSections";
+
+// Content is read from the CMS (D1) at request time.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Storage Boxes Chilliwack",
@@ -16,7 +19,8 @@ export const metadata: Metadata = {
  * home page (box sizes, services, booking, FAQ, etc.), differing only in the
  * hero heading. We mirror that by reusing <Hero> + <MainSections>.
  */
-export default function RentalPage() {
+export default async function RentalPage() {
+  const content = await getContent();
   return (
     <>
       <JsonLd
@@ -25,8 +29,8 @@ export default function RentalPage() {
           { name: "Boxes For Rent", path: "/rental-new" },
         ])}
       />
-      <Hero hero={HERO} />
-      <MainSections />
+      <Hero hero={content.hero} />
+      <MainSections content={content} />
     </>
   );
 }

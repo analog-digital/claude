@@ -11,22 +11,29 @@
   },
   "observability": {
     "enabled": true
-  }
+  },
+
+  // ── CMS / CRM database ───────────────────────────────────────────────────
+  // SQLite (Cloudflare D1). Holds editable page sections, form submissions,
+  // and onboarded clients. Schema lives in migrations/0001_init.sql.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "boxitup-cms",
+      "database_id": "8c7295c7-2020-4869-a956-814a891a6134",
+      "migrations_dir": "migrations"
+    }
+  ]
 
   // ── Future portal bindings ───────────────────────────────────────────────
-  // Uncomment and fill in IDs once created with the Cloudflare CLI.
-  //
-  // D1 database (CRM / customers / signups):
-  //   npx wrangler d1 create boxitup-crm
-  // "d1_databases": [
-  //   { "binding": "DB", "database_name": "boxitup-crm", "database_id": "<id>" }
-  // ],
-  //
   // R2 bucket (uploaded media / documents):
   //   npx wrangler r2 bucket create boxitup-media
   // "r2_buckets": [
   //   { "binding": "MEDIA", "bucket_name": "boxitup-media" }
   // ],
   //
-  // Secrets (set with `npx wrangler secret put <NAME>`), e.g. STRIPE_SECRET_KEY.
+  // Secrets (set with `npx wrangler secret put <NAME>`):
+  //   ADMIN_PASSWORD  — admin login password
+  //   SESSION_SECRET  — HMAC key for signing the admin session cookie
+  //   STRIPE_SECRET_KEY / STRIPE_WEBHOOK_SECRET — once live payments are wired
 }

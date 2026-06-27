@@ -1,0 +1,35 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const TABS = [
+  { href: "/admin", label: "Overview" },
+  { href: "/admin/content", label: "Content" },
+  { href: "/admin/submissions", label: "Submissions" },
+  { href: "/admin/clients", label: "Clients" },
+];
+
+export function AdminNav() {
+  const pathname = usePathname();
+  return (
+    <nav className="mx-auto flex max-w-6xl gap-1 px-2">
+      {TABS.map((t) => {
+        const active = t.href === "/admin" ? pathname === "/admin" : pathname.startsWith(t.href);
+        return (
+          <Link
+            key={t.href}
+            href={t.href}
+            className={`-mb-px border-b-2 px-3 py-2.5 text-sm font-medium transition-colors ${
+              active
+                ? "border-[var(--brand)] text-[var(--brand)]"
+                : "border-transparent text-[var(--muted-foreground)] hover:text-[var(--brand)]"
+            }`}
+          >
+            {t.label}
+          </Link>
+        );
+      })}
+    </nav>
+  );
+}

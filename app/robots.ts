@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      // Portal/account routes will be added here as disallow once they exist.
+      disallow: ["/admin", "/api"],
     },
     sitemap: `${SITE.url}/sitemap.xml`,
     host: SITE.url,

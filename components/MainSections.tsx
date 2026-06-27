@@ -1,25 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
-import {
-  BOX_SIZES,
-  HOW_IT_WORKS,
-  SERVICES,
-  BOOK_STEPS,
-  STORY,
-  PARTNERS,
-  FAQS,
-  TESTIMONIALS,
-  FINAL_CTA,
-} from "@/lib/content";
+import type { Content } from "@/lib/cms";
 import { JsonLd } from "@/components/JsonLd";
 import { BookRentalTabs } from "@/components/BookRentalTabs";
 
-function faqSchema() {
+function faqSchema(faqs: Content["faqs"]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: FAQS.map((f) => ({
+    mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a.replace(/\n/g, "<br />") },
@@ -31,12 +21,25 @@ function faqSchema() {
  * The shared marketing body used by both the home page and /rental-new — the
  * live site renders the identical Elementor template (box sizes, how it works,
  * services, booking, story, partners, FAQ, testimonials, CTA) on both, differing
- * only in the hero above this block.
+ * only in the hero above this block. All copy comes from the CMS (with bundled
+ * defaults), passed in as `content`.
  */
-export function MainSections() {
+export function MainSections({ content }: { content: Content }) {
+  const {
+    box_sizes: BOX_SIZES,
+    how_it_works: HOW_IT_WORKS,
+    services: SERVICES,
+    book_steps: BOOK_STEPS,
+    story: STORY,
+    partners: PARTNERS,
+    faqs: FAQS,
+    testimonials: TESTIMONIALS,
+    final_cta: FINAL_CTA,
+  } = content;
+
   return (
     <>
-      <JsonLd data={faqSchema()} />
+      <JsonLd data={faqSchema(FAQS)} />
 
       {/* ───────────── BOX SIZES ───────────── */}
       <section className="mx-auto max-w-6xl px-4 py-20">
@@ -118,7 +121,7 @@ export function MainSections() {
         <div className="mx-auto max-w-6xl px-4 py-20">
           <h2 className="text-3xl font-bold md:text-4xl">{BOOK_STEPS.heading}</h2>
           <p className="mt-3 text-[var(--muted-foreground)]">{BOOK_STEPS.intro}</p>
-          <BookRentalTabs />
+          <BookRentalTabs bookSteps={BOOK_STEPS} />
         </div>
       </section>
 

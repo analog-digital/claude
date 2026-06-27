@@ -1,8 +1,11 @@
-# Box It Up Storage — Website + Portal
+# Box It Up Storage — Website + CMS
 
 Rebuild of [boxitupstorage.ca](https://www.boxitupstorage.ca) as a fast,
-SEO-friendly, server-rendered site on **Next.js + Cloudflare**, with room to
-grow into a customer **portal** (signup → payments → CRM database).
+SEO-friendly, server-rendered site on **Next.js + Cloudflare**, with a built-in
+**CMS / CRM** backend (content editing, form submissions, client onboarding)
+and room to grow into a full customer platform (payments → billing).
+
+Live: <https://boxitup-storage.atif-a86.workers.dev>
 
 ## Stack
 
@@ -11,49 +14,49 @@ grow into a customer **portal** (signup → payments → CRM database).
 | Framework      | Next.js 16 (App Router, TypeScript, Tailwind v4)    |
 | Rendering/SEO  | Server-rendered HTML + JSON-LD structured data      |
 | Hosting        | Cloudflare Workers via `@opennextjs/cloudflare`     |
-| Database (CRM) | Cloudflare **D1** (planned)                         |
-| File storage   | Cloudflare **R2** (planned)                         |
-| Payments       | Stripe (planned)                                    |
+| Database       | Cloudflare **D1** (SQLite) — binding `DB`           |
+| Auth (admin)   | Single password → HMAC-signed session cookie        |
+| Payments       | Stripe (scaffolded — data model + admin ready)      |
 
-No Supabase — per request, persistence is Cloudflare D1.
+> The Supabase project in `.mcp.json` is **unreachable** from the build/deploy
+> environment (network policy returns `502` for `*.supabase.co`), so the CMS
+> uses Cloudflare D1 — native to the Worker and pre-planned in `wrangler.jsonc`.
 
-## Status — ⚠️ content pending
+## CMS / Admin
 
-The marketing pages are **scaffolds with placeholder copy/imagery**. The live
-site could not be scraped from the build environment (egress policy returns
-`403` for `boxitupstorage.ca`). To finish the exact 1:1 rebuild we need the
-real source — see "Getting the exact content" below.
+The admin backend lives at **`/admin`** (sign in at `/admin/login`).
 
-What's real and working now:
+- **Content** — edit every section of the home & `/rental-new` page (hero, box
+  sizes, how-it-works, services, booking steps, story, partners, FAQ,
+  testimonials, final CTA). A structured editor renders fields, repeatable list
+  items (add/remove/reorder), and nested groups. **Saves go live instantly** —
+  the public pages read content from D1 at request time, falling back to the
+  bundled defaults in `lib/content.ts`. "Reset to default" removes the override.
+- **Submissions** — every "Request a Quote" inquiry from the site is stored and
+  listed here, with a status workflow (new → contacted → won → archived).
+- **Clients** — onboarded storage clients with billing status. Manual onboarding
+  works today; the data model carries `stripe_customer_id` /
+  `stripe_subscription_id` so the public card-capture flow can populate it later.
 
-- ✅ Next.js + Cloudflare build pipeline (`npm run build`, `npm run deploy`)
-- ✅ Server-rendered pages, crawlable without JS
-- ✅ SEO infrastructure: per-page metadata, Open Graph, canonical URLs,
-  `robots.txt`, `sitemap.xml`, and `SelfStorage`/`LocalBusiness` + `WebSite` +
-  `BreadcrumbList` JSON-LD structured data
-- ✅ URL slugs preserved (`/rental-new`) to retain existing search rankings
-- ✅ Central brand tokens (`app/globals.css`) and site config (`lib/site.ts`)
-  so exact colors/fonts/NAP swap in one place
+### Admin secrets
 
-What's placeholder (clearly marked `TODO` / `PLACEHOLDER` in code):
+Set as Worker secrets (`npx wrangler secret put <NAME>`):
 
-- ❌ Exact copy, headings, imagery (WordPress media URLs)
-- ❌ Exact brand colors, fonts, font sizes, logo
-- ❌ Verified NAP (name/address/phone), pricing, unit sizes
+| Secret           | Purpose                                  |
+| ---------------- | ---------------------------------------- |
+| `ADMIN_PASSWORD` | Admin login password                     |
+| `SESSION_SECRET` | HMAC key for signing the session cookie  |
 
-## Getting the exact content
+Change the password any time with `npx wrangler secret put ADMIN_PASSWORD`.
 
-The live site is blocked by this environment's network policy. To unblock,
-either:
+## Database
 
-1. **Loosen the network policy** to allow `boxitupstorage.ca`, then start a
-   **new session** (egress policy is fixed when the container boots, so it must
-   be a fresh session), and the pages can be scraped directly; or
-2. **Provide the source** — paste each page's View-Source HTML + stylesheet, or
-   drop a WordPress export / "Save Page As → Complete" folder into the repo.
+Schema lives in `migrations/0001_init.sql` (`sections`, `submissions`,
+`clients`). Apply with:
 
-Once available, update `lib/site.ts`, `app/globals.css` (brand tokens), and the
-two page components with the exact content/assets.
+```bash
+npx wrangler d1 migrations apply boxitup-cms --remote
+```
 
 ## Local development
 
@@ -63,30 +66,43 @@ npm run dev          # http://localhost:3000
 npm run build        # production build
 npm run preview      # build + run on the Cloudflare Workers runtime locally
 npm run deploy       # build + deploy to Cloudflare Workers
+npm run cf-typegen   # regenerate cloudflare-env.d.ts after editing wrangler.jsonc
 ```
 
-## Roadmap — portal (phase 2)
+## Roadmap — live payments (next phase)
 
-1. **Signup form** → write lead to D1 (`customers` table).
-2. **Payments** → Stripe Checkout / Payment Element; webhook records payment.
-3. **CRM** → admin views over D1 (customers, units, payments, status).
+The clients data model and admin UI are in place. To turn on real billing:
 
-Cloudflare bindings for D1/R2 and Stripe secrets are stubbed in
-`wrangler.jsonc`, ready to enable.
+1. Add `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` as Worker secrets.
+2. Add a public onboarding route that collects card details via Stripe
+   Elements/Checkout, creates a Customer + Subscription, and inserts a `clients`
+   row (linked to the originating submission).
+3. Add a Stripe webhook route (`/api/stripe/webhook`) that keeps client
+   `status` and `stripe_*` fields in sync (active / past_due / canceled).
 
 ## Project layout
 
 ```
 app/
-  layout.tsx        # root layout, site-wide metadata + JSON-LD
-  page.tsx          # home (scaffold)
-  rental-new/       # service/rentals page (slug preserved)
-  robots.ts         # robots.txt
-  sitemap.ts        # sitemap.xml
+  page.tsx                  # home — reads content from CMS
+  rental-new/page.tsx       # rentals page (same template, different hero)
+  api/inquire/route.ts      # public form submission endpoint → D1
+  admin/
+    login/page.tsx          # sign in
+    actions.ts              # server actions (auth + CRUD)
+    (dash)/                 # guarded admin shell
+      page.tsx              # overview
+      content/[key]/        # section editor
+      submissions/          # leads
+      clients/              # clients / onboarding
 components/
-  SiteHeader.tsx  SiteFooter.tsx  JsonLd.tsx
+  Hero.tsx  MainSections.tsx  BookRentalTabs.tsx   # public sections
+  admin/                    # SectionEditor, AdminNav, forms, StatusSelect
 lib/
-  site.ts           # single source of truth: NAP, nav, SEO config
-wrangler.jsonc      # Cloudflare Workers config (+ D1/R2 stubs)
-open-next.config.ts # OpenNext → Cloudflare adapter config
+  content.ts                # default content + types (CMS fallback)
+  cms.ts                    # D1 data access (sections, submissions, clients)
+  auth.ts                   # admin session auth
+  site.ts                   # NAP, nav, SEO config
+migrations/0001_init.sql    # D1 schema
+wrangler.jsonc              # Cloudflare Workers config (+ D1 binding)
 ```
