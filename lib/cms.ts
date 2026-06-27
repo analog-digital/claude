@@ -23,6 +23,7 @@ import {
   FINAL_CTA,
   QUOTE_FORM,
 } from "./content";
+import { BOXES_FOR_RENT_DEFAULTS, type BoxesForRentContent } from "./boxes-for-rent-content";
 
 /** Worker env: generated D1/ASSETS bindings plus the secrets we set via
  *  `wrangler secret put` (not present in wrangler.jsonc, so typed here). */
@@ -81,19 +82,41 @@ export const DEFAULT_CONTENT: Content = {
   quote_form: QUOTE_FORM,
 };
 
-/** Ordered list of editable sections for the admin Content tab. */
-export const SECTION_LIST: { key: SectionKey; label: string; blurb: string }[] = [
-  { key: "hero", label: "Hero", blurb: "Top banner: heading, subheading, CTAs, feature cards." },
-  { key: "box_sizes", label: "Box Sizes", blurb: "“Our box sizes available” cards and legend." },
-  { key: "how_it_works", label: "How It Works", blurb: "Intro copy, paragraphs and image." },
-  { key: "services", label: "Services", blurb: "“Services available” cards with pricing." },
-  { key: "book_steps", label: "Book Your Rental", blurb: "Four booking steps + inquiry form options." },
-  { key: "story", label: "Our Story", blurb: "“How it all began” block." },
-  { key: "partners", label: "Partners", blurb: "“Trusted by our happy partners” logos." },
-  { key: "faqs", label: "FAQ", blurb: "Frequently asked questions." },
-  { key: "testimonials", label: "Testimonials", blurb: "Reviews, rating and image." },
-  { key: "final_cta", label: "Final CTA", blurb: "Closing “Box It Up Today” call to action." },
-  { key: "quote_form", label: "Request a Quote Form", blurb: "The /inquire-today step-by-step form: heading, every question, options & messages." },
+/**
+ * Combined default lookup across every editable page. The home/rentals pages use
+ * the keys in DEFAULT_CONTENT; the /boxes-for-rent page (built from Figma) uses
+ * the independent `bfr_*` keys in BOXES_FOR_RENT_DEFAULTS.
+ */
+const ALL_DEFAULTS: Record<string, unknown> = {
+  ...DEFAULT_CONTENT,
+  ...BOXES_FOR_RENT_DEFAULTS,
+};
+
+/** Ordered list of editable sections for the admin Content tab, grouped by page. */
+export const SECTION_LIST: { key: string; label: string; blurb: string; group: string }[] = [
+  { key: "hero", label: "Hero", blurb: "Top banner: heading, subheading, CTAs, feature cards.", group: "Home & Rentals pages" },
+  { key: "box_sizes", label: "Box Sizes", blurb: "“Our box sizes available” cards and legend.", group: "Home & Rentals pages" },
+  { key: "how_it_works", label: "How It Works", blurb: "Intro copy, paragraphs and image.", group: "Home & Rentals pages" },
+  { key: "services", label: "Services", blurb: "“Services available” cards with pricing.", group: "Home & Rentals pages" },
+  { key: "book_steps", label: "Book Your Rental", blurb: "Four booking steps + inquiry form options.", group: "Home & Rentals pages" },
+  { key: "story", label: "Our Story", blurb: "“How it all began” block.", group: "Home & Rentals pages" },
+  { key: "partners", label: "Partners", blurb: "“Trusted by our happy partners” logos.", group: "Home & Rentals pages" },
+  { key: "faqs", label: "FAQ", blurb: "Frequently asked questions.", group: "Home & Rentals pages" },
+  { key: "testimonials", label: "Testimonials", blurb: "Reviews, rating and image.", group: "Home & Rentals pages" },
+  { key: "final_cta", label: "Final CTA", blurb: "Closing “Box It Up Today” call to action.", group: "Home & Rentals pages" },
+  { key: "quote_form", label: "Request a Quote Form", blurb: "The /inquire-today step-by-step form: heading, every question, options & messages.", group: "Home & Rentals pages" },
+
+  // /boxes-for-rent page (Figma "RentalPage") — independent content set.
+  { key: "bfr_hero", label: "Hero", blurb: "Heading, subheading, background image, feature cards, CTA.", group: "Boxes For Rent page" },
+  { key: "bfr_box_sizes", label: "Box Sizes Carousel", blurb: "Carousel cards (pricing, dimensions, availability, rating, gallery link) + legend.", group: "Boxes For Rent page" },
+  { key: "bfr_how_it_works", label: "How It Works", blurb: "Label, subheading, description, image, button labels.", group: "Boxes For Rent page" },
+  { key: "bfr_services", label: "Services", blurb: "Three service cards with access badges + Learn More.", group: "Boxes For Rent page" },
+  { key: "bfr_book_rental", label: "Book Your Rental", blurb: "Step badges + box/plan selector + button labels.", group: "Boxes For Rent page" },
+  { key: "bfr_story", label: "Our Story", blurb: "“How it all began” block.", group: "Boxes For Rent page" },
+  { key: "bfr_partners", label: "Partners", blurb: "“Trusted by our happy partners” logos.", group: "Boxes For Rent page" },
+  { key: "bfr_faqs", label: "FAQ", blurb: "Accordion questions & answers.", group: "Boxes For Rent page" },
+  { key: "bfr_testimonials", label: "Testimonials", blurb: "Reviews, rating and image.", group: "Boxes For Rent page" },
+  { key: "bfr_final_cta", label: "Final CTA", blurb: "Closing “Box It Up Today” call to action.", group: "Boxes For Rent page" },
 ];
 
 /** Full site content: defaults overlaid with any saved section rows. */
@@ -120,8 +143,8 @@ export async function getContent(): Promise<Content> {
   return content;
 }
 
-/** A single section's current value (saved override or default). */
-export async function getSection(key: SectionKey): Promise<unknown> {
+/** A single section's current value (saved override or bundled default). */
+export async function getSection(key: string): Promise<unknown> {
   const db = getDB();
   if (db) {
     try {
@@ -134,10 +157,34 @@ export async function getSection(key: SectionKey): Promise<unknown> {
       /* fall through to default */
     }
   }
-  return DEFAULT_CONTENT[key];
+  return ALL_DEFAULTS[key];
 }
 
-export async function saveSection(key: SectionKey, data: unknown, updatedBy = "admin") {
+/** Read a group of `bfr_*` sections, overlaying saved rows on the defaults. */
+export async function getBoxesForRentContent(): Promise<BoxesForRentContent> {
+  const db = getDB();
+  const content: BoxesForRentContent = { ...BOXES_FOR_RENT_DEFAULTS };
+  if (!db) return content;
+  try {
+    const { results } = await db
+      .prepare("SELECT key, data FROM sections WHERE key LIKE 'bfr_%'")
+      .all<{ key: string; data: string }>();
+    for (const row of results ?? []) {
+      if (row.key in content) {
+        try {
+          (content as Record<string, unknown>)[row.key] = JSON.parse(row.data);
+        } catch {
+          /* keep default on parse error */
+        }
+      }
+    }
+  } catch {
+    /* table missing / db unavailable → defaults */
+  }
+  return content;
+}
+
+export async function saveSection(key: string, data: unknown, updatedBy = "admin") {
   const db = getDB();
   if (!db) throw new Error("Database unavailable");
   await db
@@ -151,7 +198,7 @@ export async function saveSection(key: SectionKey, data: unknown, updatedBy = "a
     .run();
 }
 
-export async function resetSection(key: SectionKey) {
+export async function resetSection(key: string) {
   const db = getDB();
   if (!db) throw new Error("Database unavailable");
   await db.prepare("DELETE FROM sections WHERE key = ?").bind(key).run();

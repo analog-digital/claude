@@ -27,7 +27,34 @@ investigating a break (then use the Investigation block). Never log secrets.
 
 ---
 
-## 2026-06-27 18:51 — Add engineering baseline docs + populate governance
+## 2026-06-27 19:15 — New /boxes-for-rent page from Figma (CMS-mapped)
+- Intent: build the Figma "RentalPage" design (file R7flit250CmNVuoJqqrUdg, node
+  75:9) as a new page, mapped onto the CMS, with the inquiry path feeding the
+  Submissions tab. Followed CLAUDE.md throughout.
+- Changed: new app/boxes-for-rent/page.tsx + components/bfr/* (Hero, box-sizes
+  Carousel, HowItWorks, Services, BookRental selector, Story, Partners, Faq,
+  Testimonials, FinalCta). New independent content set lib/boxes-for-rent-content.ts
+  + `bfr_*` CMS sections (grouped in the admin Content tab). Page-scoped Figma
+  palette via `.theme-bfr` in globals.css. cms.ts: getBoxesForRentContent(),
+  generalized get/save/resetSection to string keys, ALL_DEFAULTS lookup.
+  QuoteWizard now reads ?boxSize/?service to pre-select. sitemap + actions
+  revalidation updated.
+- Followed Figma DEV CONTEXT frame (212:26): tokens→scoped CSS vars, components
+  reused via props, flex/grid (no absolute), real behaviors implemented
+  (carousel prev/next + keyboard + scroll-snap; accordion one-open-at-a-time;
+  two radio groups), a11y (radiogroup/region/aria-expanded, alt text, heading
+  order h1→h2→h3).
+- Notes / decisions:
+  · Existing pages untouched — new palette is page-scoped; content set is separate.
+  · Per-box pricing, star rating, availability badge, gallery link are flagged
+    "needs owner input" in Figma → left as empty CMS fields, rendered only when
+    filled (no fake data, per CLAUDE.md §0/§4). Owner fills via admin.
+  · Box selector routes selections to /inquire-today (the canonical quote flow)
+    as query params rather than a duplicate inline form, so all submissions keep
+    flowing to the Submissions tab. Submission `source` currently logs
+    "/inquire-today" even when started from the selector — minor; could pass the
+    origin through later.
+  · Visual check done via local render screenshot — matches Figma section-by-section.
 - Intent: adopt the CLAUDE.md engineering/governance baseline for this repo and,
   per its bootstrap rule, make the companion registers reflect reality.
 - Changed: added CLAUDE.md, DEVLOG.md, GOVERNANCE.md, SECURITY-PRACTICES.md at root.

@@ -1,19 +1,44 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { Content } from "@/lib/cms";
 import { SITE } from "@/lib/site";
 
 type Step = Content["quote_form"]["steps"][number];
 
 const STANDARD_IDS = ["name", "email", "phone", "boxSize", "service", "message"];
+
+/** Loose match so a selector value like "8ft" maps to an option like "8 Ft or 10 Ft". */
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+/** Seed answers from URL query params (e.g. the /boxes-for-rent box selector). */
+function initialAnswers(steps: Step[], sp: URLSearchParams): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const step of steps) {
+    const param = sp.get(step.id);
+    if (!param) continue;
+    if (step.type === "choice") {
+      const match = (step.options ?? []).find(
+        (o) => norm(o).includes(norm(param)) || norm(param).includes(norm(o))
+      );
+      if (match) out[step.id] = match;
+    } else {
+      out[step.id] = param;
+    }
+  }
+  return out;
+}
 const inputCls =
   "w-full rounded-lg border border-[var(--border)] bg-white px-4 py-3 text-base focus:border-[var(--brand)] focus:outline-none focus:ring-2 focus:ring-[var(--brand)]/20";
 
 export function QuoteWizard({ form }: { form: Content["quote_form"] }) {
   const steps = useMemo(() => form.steps ?? [], [form.steps]);
+  const searchParams = useSearchParams();
   const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [answers, setAnswers] = useState<Record<string, string>>(() =>
+    initialAnswers(steps, new URLSearchParams(searchParams.toString()))
+  );
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
 

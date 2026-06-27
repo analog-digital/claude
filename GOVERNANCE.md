@@ -28,6 +28,7 @@ What the project depends on or connects to, and what each can touch.
 | Stripe | Payments — **placeholder, inactive** | None yet (no card data collected) | `STRIPE_*` Worker secrets (placeholder) | atif | ⚠️ pending real keys |
 | Google Fonts (next/font) | Build-time font (Jost) fetch | None | n/a | — | ✅ |
 | WordPress media (`boxitupstorage.ca`) | Images referenced by URL on public pages | Public images only | none | — | ✅ |
+| Figma (MCP connector) | Design source for design-to-code (read-only) | Figma design files the account can see | Figma account / MCP | atif | ✅ read-only |
 | YouTube embed | Hero background video | None (public embed) | none | — | ✅ |
 
 ## 2. Access & permissions
@@ -70,7 +71,7 @@ Where data goes, and whether any of it is personal/customer/sensitive.
 
 | Data type | Sensitivity | Where it flows (in → store → out) | Third parties | Status |
 |-----------|-------------|-----------------------------------|---------------|--------|
-| Visitor contact info (name/email/phone/message) | PII | Public form `/inquire-today` → `POST /api/inquire` → D1 `submissions` → admin views | Cloudflare | ⚠️ no access logging; define retention |
+| Visitor contact info (name/email/phone/message) | PII | Public forms `/inquire-today` + `/boxes-for-rent` selector → `POST /api/inquire` → D1 `submissions` → admin views | Cloudflare | ⚠️ no access logging; define retention |
 | Client records (name/email/phone/plan/amount) | PII | Admin onboarding → D1 `clients` | Cloudflare | ⚠️ no access logging |
 | Payment / card data | Sensitive | **Not collected** (Stripe inactive). When live, must go directly to Stripe; never store card data in D1 | Stripe (future) | ⚠️ design constraint |
 
@@ -110,6 +111,12 @@ changed. Never edit or delete past entries.
 ```
 ## YYYY-MM-DD — what changed on the surface (tool/secret/scope/dependency/data flow)
 ```
+
+## 2026-06-27 — New /boxes-for-rent page (Figma design-to-code)
+- Added public page `/boxes-for-rent` + independent `bfr_*` CMS content. No new
+  secret/integration/runtime dependency; reuses the existing `POST /api/inquire`
+  → D1 submissions flow (PII). Recorded the Figma MCP connector (read-only design
+  source) in §1. No change to auth scope.
 
 ## 2026-06-27 — Register populated with current surface
 - Filled §1–§6 with the real project surface (Cloudflare Workers + D1, admin auth,

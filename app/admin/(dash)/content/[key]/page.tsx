@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getSection, SECTION_LIST, type SectionKey } from "@/lib/cms";
+import { getSection, SECTION_LIST } from "@/lib/cms";
 import { SectionEditor } from "@/components/admin/SectionEditor";
 
 export const dynamic = "force-dynamic";
@@ -10,7 +10,7 @@ export default async function EditSection({ params }: { params: Promise<{ key: s
   const def = SECTION_LIST.find((s) => s.key === key);
   if (!def) notFound();
 
-  const value = await getSection(key as SectionKey);
+  const value = await getSection(key);
 
   return (
     <div>

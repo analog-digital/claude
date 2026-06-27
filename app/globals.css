@@ -70,3 +70,25 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a { color: inherit; }
+
+/*
+ * /boxes-for-rent page theme — tokens from the Figma "RentalPage" DEV CONTEXT
+ * frame (node 212:26). Scoped to this page only by wrapping it in `.theme-bfr`,
+ * so the home & /rental-new pages (matched to the live WordPress palette) are
+ * unaffected. We override the existing brand variables in-scope so the shared
+ * utility patterns (bg-[var(--brand)] etc.) pick up the brighter Figma teal.
+ *   Figma: primary #009B9F · primary-dark #034047 · primary-medium #008A8C
+ *          primary-light #CCE8E8 · accent #FF7D00 · surface #EDEDED
+ */
+.theme-bfr {
+  --brand: #009b9f;          /* Figma --color-primary (bright teal) */
+  --brand-dark: #034047;     /* Figma --color-primary-dark */
+  --brand-mid: #008a8c;      /* Figma --color-primary-medium */
+  --brand-accent: #009b9f;
+  --brand-light: #cce8e8;    /* Figma --color-primary-light */
+  --brand-pale: #cce8e8;
+  --accent: #ff7d00;         /* Figma --color-accent */
+  --accent-dark: #e57100;
+  --muted: #ededed;          /* Figma --color-surface */
+  --foreground: #000000;     /* Figma --color-text */
+}

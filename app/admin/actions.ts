@@ -9,7 +9,6 @@ import {
   updateSubmissionStatus,
   createClient,
   updateClientStatus,
-  type SectionKey,
 } from "@/lib/cms";
 
 export type FormState = { ok?: boolean; error?: string } | undefined;
@@ -32,6 +31,7 @@ export async function logoutAction() {
 function revalidatePublic() {
   revalidatePath("/");
   revalidatePath("/rental-new");
+  revalidatePath("/boxes-for-rent");
 }
 
 export async function saveSectionAction(key: string, json: string): Promise<FormState> {
@@ -42,7 +42,7 @@ export async function saveSectionAction(key: string, json: string): Promise<Form
   } catch {
     return { error: "Could not parse the edited content." };
   }
-  await saveSection(key as SectionKey, data);
+  await saveSection(key, data);
   revalidatePublic();
   revalidatePath(`/admin/content/${key}`);
   return { ok: true };
@@ -50,7 +50,7 @@ export async function saveSectionAction(key: string, json: string): Promise<Form
 
 export async function resetSectionAction(key: string): Promise<FormState> {
   await requireAuth();
-  await resetSection(key as SectionKey);
+  await resetSection(key);
   revalidatePublic();
   return { ok: true };
 }

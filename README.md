@@ -91,6 +91,7 @@ app/
   page.tsx                  # home — reads content from CMS
   rental-new/page.tsx       # rentals page (same template, different hero)
   inquire-today/page.tsx    # step-by-step "Request a Quote" wizard
+  boxes-for-rent/page.tsx   # Figma "RentalPage" build (page-scoped theme-bfr)
   api/inquire/route.ts      # public form submission endpoint → D1
   admin/
     login/page.tsx          # sign in

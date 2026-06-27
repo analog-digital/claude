@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getContent } from "@/lib/cms";
 import { JsonLd, breadcrumbSchema } from "@/components/JsonLd";
 import { QuoteWizard } from "@/components/QuoteWizard";
@@ -34,7 +35,9 @@ export default async function InquirePage() {
 
       {/* Wizard */}
       <section className="mx-auto -mt-10 max-w-2xl px-4 pb-20">
-        <QuoteWizard form={quote_form} />
+        <Suspense fallback={<div className="rounded-lg border border-[var(--border)] bg-white p-8 text-center text-[var(--muted-foreground)]">Loading…</div>}>
+          <QuoteWizard form={quote_form} />
+        </Suspense>
       </section>
     </>
   );

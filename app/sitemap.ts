@@ -9,7 +9,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     { path: "/", priority: 1.0, changeFrequency: "weekly" as const },
     { path: "/rental-new", priority: 0.9, changeFrequency: "weekly" as const },
-    // TODO: add as rebuilt — /boxes-for-rent, /about, /contact
+    { path: "/boxes-for-rent", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/inquire-today", priority: 0.7, changeFrequency: "monthly" as const },
+    // TODO: add as rebuilt — /about, /contact
   ];
 
   return routes.map((r) => ({
