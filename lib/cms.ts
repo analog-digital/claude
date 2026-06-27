@@ -21,6 +21,7 @@ import {
   FAQS,
   TESTIMONIALS,
   FINAL_CTA,
+  QUOTE_FORM,
 } from "./content";
 
 /** Worker env: generated D1/ASSETS bindings plus the secrets we set via
@@ -61,6 +62,7 @@ export type Content = {
   faqs: typeof FAQS;
   testimonials: typeof TESTIMONIALS;
   final_cta: typeof FINAL_CTA;
+  quote_form: typeof QUOTE_FORM;
 };
 
 export type SectionKey = keyof Content;
@@ -76,6 +78,7 @@ export const DEFAULT_CONTENT: Content = {
   faqs: FAQS,
   testimonials: TESTIMONIALS,
   final_cta: FINAL_CTA,
+  quote_form: QUOTE_FORM,
 };
 
 /** Ordered list of editable sections for the admin Content tab. */
@@ -90,6 +93,7 @@ export const SECTION_LIST: { key: SectionKey; label: string; blurb: string }[] =
   { key: "faqs", label: "FAQ", blurb: "Frequently asked questions." },
   { key: "testimonials", label: "Testimonials", blurb: "Reviews, rating and image." },
   { key: "final_cta", label: "Final CTA", blurb: "Closing “Box It Up Today” call to action." },
+  { key: "quote_form", label: "Request a Quote Form", blurb: "The /inquire-today step-by-step form: heading, every question, options & messages." },
 ];
 
 /** Full site content: defaults overlaid with any saved section rows. */

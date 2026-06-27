@@ -32,6 +32,10 @@ The admin backend lives at **`/admin`** (sign in at `/admin/login`).
   items (add/remove/reorder), and nested groups. **Saves go live instantly** —
   the public pages read content from D1 at request time, falling back to the
   bundled defaults in `lib/content.ts`. "Reset to default" removes the override.
+- **Request a Quote Form** — the `/inquire-today` page is a step-by-step
+  questionnaire (box size → access → duration → contact → message). Every word
+  and every question/option is editable under the "Request a Quote Form" section,
+  and all "Request a Quote" CTAs across the site link straight to it.
 - **Submissions** — every "Request a Quote" inquiry from the site is stored and
   listed here, with a status workflow (new → contacted → won → archived).
 - **Clients** — onboarded storage clients with billing status. Manual onboarding
@@ -86,6 +90,7 @@ The clients data model and admin UI are in place. To turn on real billing:
 app/
   page.tsx                  # home — reads content from CMS
   rental-new/page.tsx       # rentals page (same template, different hero)
+  inquire-today/page.tsx    # step-by-step "Request a Quote" wizard
   api/inquire/route.ts      # public form submission endpoint → D1
   admin/
     login/page.tsx          # sign in

@@ -239,3 +239,103 @@ export const FINAL_CTA = {
   body: "At Box It Up Storage, customer satisfaction is our number one priority. We offer flexible storage solutions that fit your needs. Contact us today to learn more about how we can meet your storage needs.",
   cta: { label: "Book Now", href: "/inquire-today" },
 };
+
+/**
+ * The /inquire-today "Request a Quote" page — a step-by-step questionnaire.
+ * Every word here (heading, each step's question/help/options, button labels,
+ * success message) is editable in the CMS under the "Request a Quote Form"
+ * section. Step `id`s `name`, `email`, `phone`, `boxSize`, `service` and
+ * `message` map to the matching submission columns; any other step is folded
+ * into the submission message (and the full set is always saved in `raw`).
+ * Step `type` is one of: choice | text | email | tel | textarea.
+ */
+export type QuoteStep = {
+  id: string;
+  question: string;
+  help: string;
+  type: "choice" | "text" | "email" | "tel" | "textarea";
+  required: boolean;
+  options?: string[];
+  placeholder?: string;
+};
+
+export type QuoteFormContent = {
+  heading: string;
+  subheading: string;
+  backLabel: string;
+  nextLabel: string;
+  submitLabel: string;
+  successHeading: string;
+  successBody: string;
+  steps: QuoteStep[];
+};
+
+export const QUOTE_FORM: QuoteFormContent = {
+  heading: "Get A Quote",
+  subheading:
+    "Reach out to us today to explore your storage options. Discover the ideal solution with our Rent a Box service.",
+  backLabel: "Back",
+  nextLabel: "Next",
+  submitLabel: "Submit request",
+  successHeading: "Thanks — we got your request!",
+  successBody:
+    "A member of our team will be in touch shortly to finalize your quote. For anything urgent, call 1-877-226-9488.",
+  steps: [
+    {
+      id: "boxSize",
+      question: "What size are you looking for?",
+      help: "Pick the box that best fits your needs — we can help you decide if you're unsure.",
+      type: "choice",
+      required: true,
+      options: ["8 Ft or 10 Ft", "20 Ft", "20 Ft Stackable", "40 Ft", "Not sure yet"],
+    },
+    {
+      id: "service",
+      question: "How would you like to access your storage?",
+      help: "Daily access at our facility, affordable monthly-access stackable storage, or delivery to your door.",
+      type: "choice",
+      required: true,
+      options: ["Daily Access", "Stackable Monthly Access", "Delivery To Door"],
+    },
+    {
+      id: "duration",
+      question: "How long do you expect to need storage?",
+      help: "",
+      type: "choice",
+      required: false,
+      options: ["Less than a month", "1–3 months", "3–6 months", "6+ months", "Not sure"],
+    },
+    {
+      id: "name",
+      question: "What's your name?",
+      help: "",
+      type: "text",
+      required: true,
+      placeholder: "Full name",
+    },
+    {
+      id: "email",
+      question: "What's the best email to reach you?",
+      help: "We'll send your quote and any follow-up here.",
+      type: "email",
+      required: true,
+      placeholder: "you@example.com",
+    },
+    {
+      id: "phone",
+      question: "What's the best phone number to reach you?",
+      help: "Optional — handy if you'd prefer a quick call.",
+      type: "tel",
+      required: false,
+      placeholder: "(604) 555-1234",
+    },
+    {
+      id: "message",
+      question: "Anything else we should know?",
+      help: "Tell us what you're storing, your timing, or any questions you have.",
+      type: "textarea",
+      required: false,
+      placeholder: "Optional message…",
+    },
+  ],
+};
