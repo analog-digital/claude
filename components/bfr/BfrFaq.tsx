@@ -11,8 +11,8 @@ export function BfrFaq({ heading, faqs }: { heading: string; faqs: { q: string; 
 
   return (
     <section className="mx-auto max-w-4xl px-6 py-16">
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl">{heading}</h2>
-      <div className="mt-10 divide-y divide-[var(--border)] border-y border-[var(--border)]">
+      <h2 className="text-center text-[34px] md:text-[50px]">{heading}</h2>
+      <div className="mt-10 divide-y divide-[var(--color-surface)] border-y border-[var(--color-surface)]">
         {faqs.map((f, i) => {
           const isOpen = open === i;
           return (
@@ -29,7 +29,7 @@ export function BfrFaq({ heading, faqs }: { heading: string; faqs: { q: string; 
                   {f.q}
                   <span
                     aria-hidden="true"
-                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[var(--brand)] text-lg text-white"
+                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[var(--color-primary)] text-lg text-white"
                   >
                     {isOpen ? "−" : "+"}
                   </span>
@@ -40,7 +40,7 @@ export function BfrFaq({ heading, faqs }: { heading: string; faqs: { q: string; 
                 role="region"
                 aria-labelledby={`bfr-faq-btn-${i}`}
                 hidden={!isOpen}
-                className="whitespace-pre-line pb-6 text-sm leading-relaxed text-[var(--muted-foreground)]"
+                className="whitespace-pre-line pb-6 text-sm leading-relaxed text-[var(--color-text)]"
               >
                 {f.a}
               </div>

@@ -72,23 +72,44 @@ h1, h2, h3, h4, h5, h6 {
 a { color: inherit; }
 
 /*
- * /boxes-for-rent page theme — tokens from the Figma "RentalPage" DEV CONTEXT
- * frame (node 212:26). Scoped to this page only by wrapping it in `.theme-bfr`,
- * so the home & /rental-new pages (matched to the live WordPress palette) are
- * unaffected. We override the existing brand variables in-scope so the shared
- * utility patterns (bg-[var(--brand)] etc.) pick up the brighter Figma teal.
- *   Figma: primary #009B9F · primary-dark #034047 · primary-medium #008A8C
- *          primary-light #CCE8E8 · accent #FF7D00 · surface #EDEDED
+ * Canonical Figma design tokens — DEV CONTEXT node 212:26, confirmed verbatim
+ * via get_variable_defs. Single source of truth for the /boxes-for-rent page.
+ * The home & /rental-new pages keep their own WordPress-matched palette above
+ * (intentionally different brand colours, out of scope here); these tokens are
+ * consumed only within `.theme-bfr`, so those pages are unaffected.
+ */
+:root {
+  --color-primary:        #009b9f;
+  --color-primary-dark:   #034047;
+  --color-primary-medium: #008a8c;
+  --color-primary-light:  #cce8e8;
+  --color-accent:         #ff7d00;
+  --color-text:           #000000;
+  --color-white:          #ffffff;
+  --color-surface:        #ededed;
+}
+
+/*
+ * /boxes-for-rent page scope. Body text defaults to --color-text (#000) per
+ * Figma; heading weights follow the Futura→weight map (Heavy=800, Demi=600,
+ * Book=400). Components reference the --color-* tokens directly.
  */
 .theme-bfr {
-  --brand: #009b9f;          /* Figma --color-primary (bright teal) */
-  --brand-dark: #034047;     /* Figma --color-primary-dark */
-  --brand-mid: #008a8c;      /* Figma --color-primary-medium */
-  --brand-accent: #009b9f;
-  --brand-light: #cce8e8;    /* Figma --color-primary-light */
-  --brand-pale: #cce8e8;
-  --accent: #ff7d00;         /* Figma --color-accent */
-  --accent-dark: #e57100;
-  --muted: #ededed;          /* Figma --color-surface */
-  --foreground: #000000;     /* Figma --color-text */
+  color: var(--color-text);
+}
+.theme-bfr h1,
+.theme-bfr h2 {
+  font-weight: 800;
+}
+.theme-bfr h3 {
+  font-weight: 600;
+}
+/*
+ * The <body> is shared (root layout) and carries the site default text colour.
+ * Scope it to --color-text (#000) only on pages that render .theme-bfr, so the
+ * boxes-for-rent page computes pure black per Figma while other pages keep their
+ * WordPress-matched text colour.
+ */
+body:has(.theme-bfr) {
+  color: var(--color-text);
 }

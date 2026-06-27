@@ -3,11 +3,11 @@ import type { BfrTestimonials as BfrTestimonialsData } from "@/lib/boxes-for-ren
 
 export function BfrTestimonials({ data }: { data: BfrTestimonialsData }) {
   return (
-    <section className="bg-[var(--brand-dark)] text-white">
+    <section className="bg-[var(--color-primary-dark)] text-white">
       <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-6 py-16 lg:grid-cols-2">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">{data.eyebrow}</p>
-          <h2 className="mt-2 text-3xl font-extrabold md:text-4xl">{data.heading}</h2>
+          <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-accent)]">{data.eyebrow}</p>
+          <h2 className="mt-2 text-[34px] md:text-[50px]">{data.heading}</h2>
           <div className="mt-8 space-y-6">
             {data.items.map((t) => (
               <figure key={t.name} className="rounded-lg bg-white/10 p-6">
@@ -29,7 +29,7 @@ export function BfrTestimonials({ data }: { data: BfrTestimonialsData }) {
           />
           <div className="mt-6 rounded-lg bg-white/10 p-6 text-center">
             <p className="text-4xl font-extrabold">{data.rating.score}</p>
-            <p className="mt-1 text-[var(--accent)]" aria-hidden="true">★★★★★</p>
+            <p className="mt-1 text-[var(--color-accent)]" aria-hidden="true">★★★★★</p>
             <p className="mt-1 text-sm text-white/80">
               {data.rating.count} · {data.rating.label}
             </p>
@@ -37,7 +37,7 @@ export function BfrTestimonials({ data }: { data: BfrTestimonialsData }) {
               href={data.reviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-block rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--accent-dark)]"
+              className="mt-4 inline-block rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90"
             >
               Read Reviews →
             </a>

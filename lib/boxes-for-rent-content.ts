@@ -129,11 +129,11 @@ export const BFR_HERO: BfrHero = {
   features: [
     {
       title: "Convenient Access",
-      body: "Say goodbye to long drives and strict facility hours—store your items close to home with flexible access.",
+      body: "Say goodbye to long drives and skip facility hours—store your boxes close to home with flexible access times for your schedule.",
     },
     {
       title: "Secure Storage",
-      body: "Rest easy knowing your valuables are protected in our 24/7 monitored facility.",
+      body: "Feel confident knowing your valuables are protected in our 24/7 monitored facility, ensuring safety and security at all times.",
     },
   ],
   ctaLabel: "Book a Rental",

@@ -27,6 +27,27 @@ investigating a break (then use the Investigation block). Never log secrets.
 
 ---
 
+## 2026-06-27 19:53 — /boxes-for-rent pixel-fidelity pass vs Figma
+- Intent: bring the page to pixel-fidelity with the Figma (node 75:10) at 1440px;
+  fix token/cascade/weight/casing/layout divergences found in an audit.
+- Changed: globals.css — replaced the rogue `.theme-bfr` palette override with the
+  canonical `--color-*` token layer (8 tokens, confirmed via get_variable_defs);
+  scoped heading weights (h1/h2=800, h3=600) and `body:has(.theme-bfr){color:#000}`
+  to this page only. Rewrote components/bfr/* to reference `--color-*` directly
+  (no more --brand/--accent/--foreground/--muted/--border on this page). Rebuilt
+  BfrHero to the measured composition (solid primary panel; H1 40/50 uppercase 800;
+  dark features panel 452px; 46×46 #EDEDED icon tiles; 13px Bold uppercase labels;
+  11px bodies; 150×34 accent button). Section labels → 50px Heavy. Star ratings →
+  real SVG. Hero feature copy updated to Figma's exact wording.
+- Verified (computed-style QA at 1440): 8 tokens exact; body color rgb(0,0,0);
+  H1 + all section H2 weight 800 / 50px / Jost; hero matches Figma screenshot.
+- Notes / deliberate deviation (CLAUDE.md §0): the global `--brand*` palette is
+  KEPT in :root because the home & /rental-new pages depend on it (different,
+  WordPress-matched colors — out of scope). It is no longer referenced anywhere on
+  /boxes-for-rent, so this page uses only the canonical `--color-*` layer. Content
+  gaps (per-box pricing/rating/availability/gallery) remain CMS-editable, hidden
+  until filled — not faked.
+
 ## 2026-06-27 19:15 — New /boxes-for-rent page from Figma (CMS-mapped)
 - Intent: build the Figma "RentalPage" design (file R7flit250CmNVuoJqqrUdg, node
   75:9) as a new page, mapped onto the CMS, with the inquiry path feeding the

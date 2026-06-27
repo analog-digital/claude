@@ -22,9 +22,9 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
   const quoteHref = `/inquire-today${params.toString() ? `?${params}` : ""}`;
 
   return (
-    <section className="bg-[var(--brand)] text-white">
+    <section className="bg-[var(--color-primary)] text-white">
       <div className="mx-auto max-w-[1440px] px-6 py-16">
-        <h2 className="text-3xl font-extrabold md:text-4xl">{data.heading}</h2>
+        <h2 className="text-[34px] md:text-[50px]">{data.heading}</h2>
         <p className="mt-3 text-white/90">{data.subHeading}</p>
 
         {/* Step badges */}
@@ -38,7 +38,7 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
         </ol>
 
         {/* Selector */}
-        <div className="mt-8 rounded-lg bg-white p-6 text-[var(--foreground)] md:p-8">
+        <div className="mt-8 rounded-lg bg-white p-6 text-[var(--color-text)] md:p-8">
           <h3 className="text-xl font-bold">{data.selectorHeading}</h3>
 
           <fieldset className="mt-5">
@@ -52,7 +52,7 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
                     value={opt}
                     checked={size === opt}
                     onChange={() => setSize(opt)}
-                    className="h-4 w-4 accent-[var(--brand)]"
+                    className="h-4 w-4 accent-[var(--color-primary)]"
                   />
                   {opt}
                 </label>
@@ -71,7 +71,7 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
                     value={opt}
                     checked={service === opt}
                     onChange={() => setService(opt)}
-                    className="h-4 w-4 accent-[var(--brand)]"
+                    className="h-4 w-4 accent-[var(--color-primary)]"
                   />
                   {opt}
                 </label>
@@ -82,13 +82,13 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
           <div className="mt-7 flex flex-wrap gap-4">
             <Link
               href={quoteHref}
-              className="rounded-lg bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--accent-dark)]"
+              className="rounded-lg bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90"
             >
               {data.requestQuoteLabel}
             </Link>
             <a
               href={`tel:${SITE.phone}`}
-              className="rounded-lg border border-[var(--brand)] px-6 py-3 text-sm font-semibold text-[var(--brand)] hover:bg-[var(--brand)]/10"
+              className="rounded-lg border border-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10"
             >
               {data.callUsLabel}
             </a>
