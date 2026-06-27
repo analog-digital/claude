@@ -1,22 +1,23 @@
 @import "tailwindcss";
 
 /*
- * BRAND DESIGN TOKENS
- * ⚠️ PLACEHOLDER VALUES — these are neutral stand-ins. Replace every token
- * below with the EXACT colors from the live boxitupstorage.ca stylesheet so
- * the rebuild is pixel-identical. Because everything references these
- * variables, updating this block re-skins the whole site in one place.
+ * BRAND DESIGN TOKENS — sourced from the live boxitupstorage.ca styles.
+ * Brand teal #034047 and orange #FF7D00 are taken directly from the site's
+ * inline SVG accents. Fonts (Inter + Manrope) match the locally-hosted Google
+ * fonts the site loads. NOTE: the live site's per-section spacing lives in
+ * external Elementor CSS files; this rebuild matches the palette, type and
+ * layout closely — fetch those CSS files for pixel-exact spacing if needed.
  */
 :root {
   --background: #ffffff;
   --foreground: #1a1a1a;
 
-  /* Brand palette — TODO: replace with exact hex values from the live site. */
-  --brand: #1f6feb;          /* primary brand color (buttons, links, accents) */
-  --brand-dark: #1a5fcc;     /* hover / pressed state */
-  --brand-contrast: #ffffff; /* text on brand backgrounds */
-  --accent: #f5a623;         /* secondary accent */
-  --muted: #f4f5f7;          /* light section backgrounds */
+  --brand: #034047;          /* primary brand teal */
+  --brand-dark: #022f34;     /* hover / pressed */
+  --brand-contrast: #ffffff;
+  --accent: #ff7d00;         /* brand orange */
+  --accent-dark: #e87100;
+  --muted: #f4f6f6;          /* light section background */
   --muted-foreground: #5b6470;
   --border: #e3e6ea;
 }
@@ -28,12 +29,12 @@
   --color-brand-dark: var(--brand-dark);
   --color-brand-contrast: var(--brand-contrast);
   --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  /* Font CSS vars are provided by next/font in layout.tsx. */
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-heading: var(--font-heading);
 }
 
 body {
@@ -42,6 +43,8 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-a {
-  color: inherit;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), var(--font-sans), sans-serif;
 }
+
+a { color: inherit; }

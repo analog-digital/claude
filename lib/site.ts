@@ -1,60 +1,67 @@
 /**
  * Central site configuration — single source of truth for SEO metadata,
  * structured data (JSON-LD), navigation, and NAP (Name / Address / Phone).
- *
- * ⚠️  VERIFY-AGAINST-LIVE-SITE: The values below were assembled from a web
- * search because the live site (boxitupstorage.ca) is currently unreachable
- * from this build environment (egress policy 403). Anything marked `TODO`
- * must be confirmed against the real site before launch. Update this one file
- * and every page's metadata + structured data updates with it.
+ * Values transcribed from the live boxitupstorage.ca source.
  */
+
+export const MEDIA = "https://www.boxitupstorage.ca/wp-content/uploads";
 
 export const SITE = {
   name: "Box It Up Storage",
   shortName: "Box It Up",
-  // Canonical production origin. TODO: confirm www vs non-www canonical.
   url: "https://www.boxitupstorage.ca",
-  // Used in <meta description> fallback and Open Graph.
+  // Matches the live <title> / meta description for the home page.
+  title: "Storage Boxes Chilliwack | Box It Up Storage",
   description:
-    "Box It Up Storage offers secure, affordable self storage and portable storage boxes in Chilliwack, BC. Flexible month-to-month rentals with easy access.",
+    "Box It Up Storage offers customizable storage solutions for residential and commercial clients.",
   locale: "en_CA",
-  // Brand contact — Name / Address / Phone (NAP) must match the live site
-  // and Google Business Profile EXACTLY for local SEO.
-  phone: "+1-877-226-9488", // 1-877-2BOXITUP — TODO: confirm
-  phoneDisplay: "1-877-2BOXITUP",
-  email: "", // TODO: pull from /contact/
+  phone: "+1-877-226-9488",
+  phoneDisplay: "1-877-226-9488",
+  phoneVanity: "1-877-2BOXITUP",
+  email: "info@boxitupstorage.ca",
   address: {
-    // TODO: VERIFY exact street address from /contact/ — search returned this.
     streetAddress: "44620 Skylark Road",
     addressLocality: "Chilliwack",
     addressRegion: "BC",
     postalCode: "V2R 6H5",
     addressCountry: "CA",
   },
-  // Geo coordinates power the LocalBusiness map pin. TODO: confirm.
-  geo: {
-    latitude: 49.1579,
-    longitude: -121.9515,
-  },
-  // Gate / access hours surfaced by search ("7am–8pm daily via automated gate").
-  // TODO: confirm office hours vs gate-access hours separately.
+  geo: { latitude: 49.1654691, longitude: -121.9868934 },
+  mapsUrl:
+    "https://www.google.com/maps/place/Box+It+Up+Storage/@49.1654726,-121.9894683,17z/data=!3m1!4b1!4m6!3m5!1s0x548447388a778223:0xc66e8fc770f08c13!8m2!3d49.1654691!4d-121.9868934!16s%2Fg%2F11swzklbx6",
   openingHours: [
-    { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], opens: "07:00", closes: "20:00" },
+    {
+      days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "07:00",
+      closes: "20:00",
+    },
   ],
   socials: {
-    facebook: "https://www.facebook.com/boxitupstorage/",
-    // TODO: add others if present on the live site.
+    facebook: "https://www.facebook.com/boxitupstorage",
+    instagram: "https://www.instagram.com/boxitup.storage/",
   },
+  logo: {
+    header: `${MEDIA}/2024/08/Box-It-Up-Logo.png`, // 1664×460 transparent PNG
+    footer: `${MEDIA}/2024/08/Box-It-Up-Logo.jpg`, // 400×112
+  },
+  inquireUrl: "/inquire-today",
+  copyright: "Copyright © 2024 Box It Up Storage. All rights reserved.",
+  designer: { label: "Website Designed By Longhouse Branding & Marketing", href: "https://www.longhouse.co" },
 } as const;
 
-/**
- * Primary navigation. Slugs intentionally mirror the existing WordPress URLs
- * so inbound links and search rankings carry over to the rebuild.
- */
+/** Primary navigation — slugs mirror the existing WordPress URLs for SEO continuity. */
 export const NAV: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
-  { label: "Rentals", href: "/rental-new" },
-  { label: "Boxes for Rent", href: "/boxes-for-rent" },
   { label: "About", href: "/about" },
+  { label: "Boxes For Rent", href: "/boxes-for-rent" },
+  { label: "Boxes For Sale", href: "/boxes-for-sale" },
   { label: "Contact", href: "/contact" },
+];
+
+/** Footer "Resources" column. */
+export const FOOTER_LINKS: { label: string; href: string }[] = [
+  { label: "About Us", href: "/about" },
+  { label: "Boxes For Rent", href: "/boxes-for-rent" },
+  { label: "Boxes For Sales", href: "/boxes-for-sale" },
+  { label: "Contact Us", href: "/contact" },
 ];
