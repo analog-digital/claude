@@ -1,0 +1,12 @@
+# Local dev secrets. Copy to `.dev.vars` (gitignored) and fill in real values.
+# In production these are set as Worker secrets: npx wrangler secret put <NAME>
+
+# Admin login
+ADMIN_PASSWORD="change-me"
+SESSION_SECRET="generate-with: openssl rand -hex 32"
+
+# Stripe — PLACEHOLDERS. Billing stays disabled until these are real keys.
+# Replace with sk_test_…/pk_test_… (or sk_live_…/pk_live_…) to enable.
+STRIPE_SECRET_KEY="sk_test_PLACEHOLDER"
+STRIPE_PUBLISHABLE_KEY="pk_test_PLACEHOLDER"
+STRIPE_WEBHOOK_SECRET="whsec_PLACEHOLDER"

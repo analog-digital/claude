@@ -1,4 +1,5 @@
 import { listClients, getContent } from "@/lib/cms";
+import { isStripeConfigured } from "@/lib/stripe";
 import { setClientStatusAction } from "@/app/admin/actions";
 import { StatusSelect } from "@/components/admin/StatusSelect";
 import { NewClientForm } from "@/components/admin/NewClientForm";
@@ -16,6 +17,7 @@ export default async function ClientsPage() {
   const [clients, content] = await Promise.all([listClients(), getContent()]);
   const plans = content.services.cards.map((c) => c.title);
   const boxSizes = content.book_steps.boxSizeOptions;
+  const stripeOn = isStripeConfigured();
 
   return (
     <div>
@@ -27,6 +29,24 @@ export default async function ClientsPage() {
           </p>
         </div>
         <NewClientForm plans={plans} boxSizes={boxSizes} />
+      </div>
+
+      <div
+        className={`mt-4 flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm ${
+          stripeOn
+            ? "border-[var(--brand)] bg-[var(--brand-pale)] text-[var(--brand)]"
+            : "border-[var(--border)] bg-white text-[var(--muted-foreground)]"
+        }`}
+      >
+        <span className={`h-2 w-2 rounded-full ${stripeOn ? "bg-[var(--brand)]" : "bg-amber-400"}`} />
+        {stripeOn ? (
+          <span>Stripe is connected — clients who complete the payment flow appear here automatically.</span>
+        ) : (
+          <span>
+            Stripe not configured (placeholder keys). Billing is disabled; clients are recorded manually. Set
+            <code className="mx-1 rounded bg-[var(--muted)] px-1">STRIPE_SECRET_KEY</code> to enable.
+          </span>
+        )}
       </div>
 
       {clients.length === 0 ? (

@@ -29,7 +29,9 @@ export type AppEnv = {
   DB: D1Database;
   ADMIN_PASSWORD?: string;
   SESSION_SECRET?: string;
+  // Stripe — placeholders for now; billing stays disabled until real keys are set.
   STRIPE_SECRET_KEY?: string;
+  STRIPE_PUBLISHABLE_KEY?: string;
   STRIPE_WEBHOOK_SECRET?: string;
 };
 
