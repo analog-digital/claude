@@ -110,16 +110,16 @@ A list of open, unpatched vulnerabilities is itself sensitive. So:
 
 | Area | Control in place? | Last reviewed | Notes (non-sensitive) |
 |------|-------------------|---------------|-----------------------|
-| Server-side authorization (deny by default) | ❓ | — | |
-| No default/seeded admin accounts | ❓ | — | |
-| Least privilege (users/tokens/connectors) | ❓ | — | |
-| Secrets out of code, in secret store | ❓ | — | |
-| Input validation / parameterized queries | ❓ | — | |
-| TLS + encryption at rest | ❓ | — | |
-| PII minimized + access logged | ❓ | — | |
-| Dependency vulnerability scanning | ❓ | — | |
-| Audit logging of sensitive actions | ❓ | — | |
-| AI/MCP connector permissions reviewed | ❓ | — | |
+| Server-side authorization (deny by default) | ✅ | 2026-06-27 | Admin pages + server actions call `requireAuth()`; unauthed → redirect to login. Public API only writes submissions. |
+| No default/seeded admin accounts | ⚠️ | 2026-06-27 | No account seeded in code, but auth is a single shared password (not per-user/gated). |
+| Least privilege (users/tokens/connectors) | ⚠️ | 2026-06-27 | Admin is all-or-nothing; CF token scope unconfirmed; Supabase service_role over-privileged + exposed (GOVERNANCE §7). |
+| Secrets out of code, in secret store | ⚠️ | 2026-06-27 | App secrets in Worker store ✅; **Supabase service_role key committed in `.mcp.json`** (GOVERNANCE §7). |
+| Input validation / parameterized queries | ✅ | 2026-06-27 | `/api/inquire` validates + honeypot; all D1 queries use `.bind()` parameterization. |
+| TLS + encryption at rest | ⚠️ | 2026-06-27 | TLS via Cloudflare ✅; D1 at-rest encryption is Cloudflare-managed (not app-controlled). |
+| PII minimized + access logged | ⚠️ | 2026-06-27 | Only needed contact fields collected; no access logging or retention policy yet. |
+| Dependency vulnerability scanning | ⚠️ | 2026-06-27 | None configured; `npm audit` = 4 moderate advisories. |
+| Audit logging of sensitive actions | ⚠️ | 2026-06-27 | No audit log for admin actions or PII access. |
+| AI/MCP connector permissions reviewed | ⚠️ | 2026-06-27 | Supabase MCP uses an exposed service_role key (GOVERNANCE §7); other connectors are session-level. |
 
 ### Posture change register (append-only, non-sensitive)
 
@@ -127,6 +127,11 @@ A list of open, unpatched vulnerabilities is itself sensitive. So:
 ## YYYY-MM-DD — area: what changed in posture (control added/hardened/reviewed)
 ```
 
+## 2026-06-27 — Posture table assessed against current build
+- Performed first real assessment (see table). Strengths: server-side authz
+  (deny-by-default) and parameterized D1 queries. Gaps flagged: committed Supabase
+  service_role key, single shared admin credential (no MFA/audit), no dependency
+  scanning, no PII access logging. Detail + backlog in GOVERNANCE §7.
+
 ## 2026-06-27 — Practices established
-- Created SECURITY-PRACTICES.md and CLAUDE.md §9. Posture table seeded as ❓ pending
-  real assessment. Open vulnerabilities, if any, to be tracked privately — not here.
+- Created SECURITY-PRACTICES.md and CLAUDE.md §9.

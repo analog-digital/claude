@@ -27,8 +27,17 @@ investigating a break (then use the Investigation block). Never log secrets.
 
 ---
 
-## 2026-06-27 — DEVLOG started
-- Intent: establish an intent-level change log alongside git, per CLAUDE.md §7.
-- Changed: added DEVLOG.md, added CLAUDE.md §7 describing how to use it.
-- Notes: log entries are append-only and intent-level by default; per-edit
-  automation via hook is available later if wanted.
+## 2026-06-27 18:51 — Add engineering baseline docs + populate governance
+- Intent: adopt the CLAUDE.md engineering/governance baseline for this repo and,
+  per its bootstrap rule, make the companion registers reflect reality.
+- Changed: added CLAUDE.md, DEVLOG.md, GOVERNANCE.md, SECURITY-PRACTICES.md at root.
+  Populated GOVERNANCE §1–§7 and the SECURITY-PRACTICES posture table with the
+  actual surface (Cloudflare Workers + D1, admin auth, Stripe placeholders,
+  public form → D1 PII flow).
+- Notes / conflict skim (CLAUDE.md §0): existing code largely aligns — server-side
+  authz with deny-by-default, parameterized D1 queries, secrets in the Worker store.
+  **One real conflict found:** the Supabase `service_role` key is committed in
+  `.mcp.json` (pre-existing). Logged as HIGH in GOVERNANCE §7 — needs rotation +
+  removal by the owner. Not auto-fixed (would change their MCP config); flagged for
+  a human call. Also: no dependency scanning (4 moderate npm advisories), single
+  shared admin credential (no MFA/audit). Docs-only change; no app code touched.
