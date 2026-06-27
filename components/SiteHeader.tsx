@@ -80,7 +80,7 @@ export function SiteHeader() {
 
           <Link
             href={SITE.inquireUrl}
-            className="rounded-md bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--accent-dark)] transition-colors"
+            className="rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--accent-dark)] transition-colors"
           >
             Inquire Today
           </Link>

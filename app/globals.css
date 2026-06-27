@@ -1,25 +1,40 @@
 @import "tailwindcss";
 
 /*
- * BRAND DESIGN TOKENS — sourced from the live boxitupstorage.ca styles.
- * Brand teal #034047 and orange #FF7D00 are taken directly from the site's
- * inline SVG accents. Fonts (Inter + Manrope) match the locally-hosted Google
- * fonts the site loads. NOTE: the live site's per-section spacing lives in
- * external Elementor CSS files; this rebuild matches the palette, type and
- * layout closely — fetch those CSS files for pixel-exact spacing if needed.
+ * BRAND DESIGN TOKENS — extracted from the live boxitupstorage.ca Elementor
+ * global kit (wp-content/uploads/elementor/css/post-100.css). Colors and
+ * typography mirror the kit's --e-global-* variables:
+ *   primary/secondary text  #1E3238   brand teal            #034047
+ *   teal mid                #056D71   teal accent           #07989C
+ *   teal light              #64CCC5   teal pale bg          #E7FBF9
+ *   accent orange           #FE8506   accent orange light   #FFAB54
+ *   light section bg        #F3F3F4   border                #DCDCDE
+ * The kit's brand typeface is FuturaPT (a geometric sans, not actually
+ * web-loaded on the live site); we use Jost — the closest free Google Fonts
+ * equivalent — for both headings and body, weight 700 headings / 400 body.
+ * Dominant corner radius across cards & buttons is 8px.
  */
 :root {
   --background: #ffffff;
-  --foreground: #1a1a1a;
+  --foreground: #1e3238;     /* primary dark teal-charcoal (headings/body) */
 
-  --brand: #034047;          /* primary brand teal */
+  --brand: #034047;          /* primary brand teal (dark sections) */
   --brand-dark: #022f34;     /* hover / pressed */
+  --brand-mid: #056d71;      /* mid teal */
+  --brand-accent: #07989c;   /* teal accent */
+  --brand-light: #64ccc5;    /* light teal */
+  --brand-pale: #e7fbf9;     /* pale teal section background */
   --brand-contrast: #ffffff;
-  --accent: #ff7d00;         /* brand orange */
-  --accent-dark: #e87100;
-  --muted: #f4f6f6;          /* light section background */
+
+  --accent: #fe8506;         /* brand orange */
+  --accent-dark: #e5760a;    /* hover / pressed */
+  --accent-light: #ffab54;   /* light orange */
+
+  --muted: #f3f3f4;          /* light section background */
   --muted-foreground: #5b6470;
-  --border: #e3e6ea;
+  --border: #dcdcde;
+
+  --radius: 8px;             /* dominant card/button radius */
 }
 
 @theme inline {
@@ -27,24 +42,31 @@
   --color-foreground: var(--foreground);
   --color-brand: var(--brand);
   --color-brand-dark: var(--brand-dark);
+  --color-brand-mid: var(--brand-mid);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-light: var(--brand-light);
+  --color-brand-pale: var(--brand-pale);
   --color-brand-contrast: var(--brand-contrast);
   --color-accent: var(--accent);
   --color-accent-dark: var(--accent-dark);
+  --color-accent-light: var(--accent-light);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --radius-brand: var(--radius);
   --font-sans: var(--font-sans);
-  --font-heading: var(--font-heading);
+  --font-heading: var(--font-sans);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), "Futura PT", "Century Gothic", Arial, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading), var(--font-sans), sans-serif;
+  font-family: var(--font-sans), "Futura PT", "Century Gothic", Arial, sans-serif;
+  font-weight: 700;
 }
 
 a { color: inherit; }

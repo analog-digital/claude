@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Manrope } from "next/font/google";
+import { Jost } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import { JsonLd, localBusinessSchema, websiteSchema } from "@/components/JsonLd";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
-// Matches the locally-hosted Google fonts the live site loads.
-const inter = Inter({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
-const manrope = Manrope({ variable: "--font-heading", subsets: ["latin"], display: "swap" });
+// Jost — the closest free Google Fonts match to FuturaPT, the geometric sans
+// declared as the brand typeface in the live site's Elementor global kit.
+const jost = Jost({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -44,7 +49,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-CA" className={`${inter.variable} ${manrope.variable} h-full antialiased`}>
+    <html lang="en-CA" className={`${jost.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)]">
         <JsonLd data={localBusinessSchema()} />
         <JsonLd data={websiteSchema()} />

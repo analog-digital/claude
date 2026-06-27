@@ -80,9 +80,9 @@ export function SiteFooter() {
               name="email"
               required
               placeholder="Email"
-              className="min-w-0 flex-1 rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
+              className="min-w-0 flex-1 rounded-lg border border-white/30 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
             />
-            <button type="submit" className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-dark)]">
+            <button type="submit" className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-dark)]">
               Sign Up
             </button>
           </form>

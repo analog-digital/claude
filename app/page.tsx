@@ -55,17 +55,17 @@ export default function HomePage() {
           <h1 className="max-w-3xl text-4xl font-extrabold leading-tight md:text-6xl">{HERO.heading}</h1>
           <p className="mt-5 max-w-2xl text-lg text-white/90 md:text-xl">{HERO.subheading}</p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link href={HERO.primaryCta.href} className="rounded-md bg-[var(--accent)] px-7 py-3.5 font-semibold text-white hover:bg-[var(--accent-dark)]">
+            <Link href={HERO.primaryCta.href} className="rounded-lg bg-[var(--accent)] px-7 py-3.5 font-semibold text-white hover:bg-[var(--accent-dark)]">
               {HERO.primaryCta.label}
             </Link>
-            <a href={HERO.secondaryCta.href} className="rounded-md border border-white px-7 py-3.5 font-semibold text-white hover:bg-white/10">
+            <a href={HERO.secondaryCta.href} className="rounded-lg border border-white px-7 py-3.5 font-semibold text-white hover:bg-white/10">
               {HERO.secondaryCta.label}
             </a>
           </div>
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2">
             {HERO.features.map((f) => (
-              <div key={f.title} className="rounded-xl bg-white/10 p-6 backdrop-blur">
+              <div key={f.title} className="rounded-lg bg-white/10 p-6 backdrop-blur">
                 <h2 className="text-xl font-bold">{f.title}</h2>
                 <p className="mt-2 text-sm text-white/85">{f.body}</p>
               </div>
@@ -93,7 +93,7 @@ export default function HomePage() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {BOX_SIZES.slides.map((s) => (
-            <article key={s.title} className="flex flex-col overflow-hidden rounded-xl border border-[var(--border)]">
+            <article key={s.title} className="flex flex-col overflow-hidden rounded-lg border border-[var(--border)]">
               <Image src={s.image} alt={s.title} width={1200} height={678} className="aspect-video w-full object-cover" />
               <div className="flex flex-1 flex-col p-5">
                 <h3 className="text-lg font-bold">{s.title}</h3>
@@ -114,15 +114,15 @@ export default function HomePage() {
               <p key={i} className="mt-4 text-[var(--muted-foreground)]">{p}</p>
             ))}
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link href={SITE.inquireUrl} className="rounded-md bg-[var(--accent)] px-6 py-3 font-semibold text-white hover:bg-[var(--accent-dark)]">
+              <Link href={SITE.inquireUrl} className="rounded-lg bg-[var(--accent)] px-6 py-3 font-semibold text-white hover:bg-[var(--accent-dark)]">
                 REQUEST A QUOTE
               </Link>
-              <a href={`tel:${SITE.phone}`} className="rounded-md border border-[var(--brand)] px-6 py-3 font-semibold text-[var(--brand)] hover:bg-[var(--brand)]/10">
+              <a href={`tel:${SITE.phone}`} className="rounded-lg border border-[var(--brand)] px-6 py-3 font-semibold text-[var(--brand)] hover:bg-[var(--brand)]/10">
                 CALL US TODAY
               </a>
             </div>
           </div>
-          <Image src={HOW_IT_WORKS.image} alt="How it works" width={676} height={451} className="w-full rounded-xl object-cover" />
+          <Image src={HOW_IT_WORKS.image} alt="How it works" width={676} height={451} className="w-full rounded-lg object-cover" />
         </div>
       </section>
 
@@ -131,7 +131,7 @@ export default function HomePage() {
         <h2 className="text-3xl font-bold md:text-4xl">{SERVICES.heading}</h2>
         <div className="mt-10 grid gap-8 md:grid-cols-3">
           {SERVICES.cards.map((c) => (
-            <article key={c.title} className="overflow-hidden rounded-xl border border-[var(--border)]">
+            <article key={c.title} className="overflow-hidden rounded-lg border border-[var(--border)]">
               <div className="relative">
                 <Image src={c.image} alt={c.title} width={392} height={291} className="aspect-[4/3] w-full object-cover" />
                 <span className="absolute left-4 top-4 max-w-[70%] rounded bg-[var(--brand)] px-3 py-1.5 text-xs font-semibold text-white">
@@ -164,11 +164,11 @@ export default function HomePage() {
           <p className="text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">{STORY.eyebrow}</p>
           <h2 className="mt-2 text-3xl font-bold md:text-4xl">{STORY.heading}</h2>
           <p className="mt-5 text-[var(--muted-foreground)]">{STORY.body}</p>
-          <Link href={STORY.cta.href} className="mt-8 inline-block rounded-md bg-[var(--brand)] px-6 py-3 font-semibold text-white hover:bg-[var(--brand-dark)]">
+          <Link href={STORY.cta.href} className="mt-8 inline-block rounded-lg bg-[var(--brand)] px-6 py-3 font-semibold text-white hover:bg-[var(--brand-dark)]">
             {STORY.cta.label}
           </Link>
         </div>
-        <Image src={STORY.image} alt={STORY.heading} width={872} height={951} className="w-full rounded-xl object-cover" />
+        <Image src={STORY.image} alt={STORY.heading} width={872} height={951} className="w-full rounded-lg object-cover" />
       </section>
 
       {/* ───────────── PARTNERS ───────────── */}
@@ -188,7 +188,7 @@ export default function HomePage() {
       {/* ───────────── FAQ ───────────── */}
       <section className="mx-auto max-w-4xl px-4 py-20">
         <h2 className="text-center text-3xl font-bold md:text-4xl">FREQUENTLY ASKED QUESTIONS</h2>
-        <div className="mt-10 divide-y divide-[var(--border)] rounded-xl border border-[var(--border)]">
+        <div className="mt-10 divide-y divide-[var(--border)] rounded-lg border border-[var(--border)]">
           {FAQS.map((f, i) => (
             <details key={f.q} className="group" open={i === 0}>
               <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 font-semibold marker:content-none">
@@ -213,7 +213,7 @@ export default function HomePage() {
             <h2 className="mt-2 text-3xl font-bold md:text-4xl">{TESTIMONIALS.heading}</h2>
             <div className="mt-8 space-y-6">
               {TESTIMONIALS.items.map((t) => (
-                <figure key={t.name} className="rounded-xl bg-white/10 p-6">
+                <figure key={t.name} className="rounded-lg bg-white/10 p-6">
                   <blockquote className="text-white/90">“{t.text}”</blockquote>
                   <figcaption className="mt-3 text-sm font-semibold">
                     {t.name} <span className="font-normal text-white/70">— {t.role}</span>
@@ -223,12 +223,12 @@ export default function HomePage() {
             </div>
           </div>
           <div className="relative">
-            <Image src={TESTIMONIALS.image} alt="Box It Up Storage facility" width={1151} height={1536} className="mx-auto w-full max-w-sm rounded-xl object-cover" />
-            <div className="mt-6 rounded-xl bg-white/10 p-6 text-center">
+            <Image src={TESTIMONIALS.image} alt="Box It Up Storage facility" width={1151} height={1536} className="mx-auto w-full max-w-sm rounded-lg object-cover" />
+            <div className="mt-6 rounded-lg bg-white/10 p-6 text-center">
               <p className="text-4xl font-extrabold">{TESTIMONIALS.rating.score}</p>
               <p className="mt-1 text-[var(--accent)]" aria-hidden="true">★★★★★</p>
               <p className="mt-1 text-sm text-white/80">{TESTIMONIALS.rating.count} · {TESTIMONIALS.rating.label}</p>
-              <a href={TESTIMONIALS.reviewsUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block rounded-md bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--accent-dark)]">
+              <a href={TESTIMONIALS.reviewsUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--accent-dark)]">
                 Read Reviews →
               </a>
             </div>
@@ -240,7 +240,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-3xl px-4 py-20 text-center">
         <h2 className="text-3xl font-bold md:text-4xl">{FINAL_CTA.heading}</h2>
         <p className="mt-4 text-[var(--muted-foreground)]">{FINAL_CTA.body}</p>
-        <Link href={FINAL_CTA.cta.href} className="mt-8 inline-block rounded-md bg-[var(--accent)] px-8 py-3.5 font-semibold text-white hover:bg-[var(--accent-dark)]">
+        <Link href={FINAL_CTA.cta.href} className="mt-8 inline-block rounded-lg bg-[var(--accent)] px-8 py-3.5 font-semibold text-white hover:bg-[var(--accent-dark)]">
           {FINAL_CTA.cta.label}
         </Link>
       </section>

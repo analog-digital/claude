@@ -63,7 +63,7 @@ export default function RentalPage() {
           ].map(([name, size, price, body]) => (
             <div key={name} className="flex flex-col rounded-lg border border-[var(--border)] p-6">
               {/* TODO: unit photo (WP media URL) */}
-              <div className="mb-4 aspect-video rounded-md border border-dashed border-[var(--border)] bg-[var(--muted)] grid place-items-center text-xs text-[var(--muted-foreground)]">
+              <div className="mb-4 aspect-video rounded-lg border border-dashed border-[var(--border)] bg-[var(--muted)] grid place-items-center text-xs text-[var(--muted-foreground)]">
                 Image placeholder
               </div>
               <h3 className="font-semibold text-lg">{name}</h3>
@@ -73,7 +73,7 @@ export default function RentalPage() {
               {/* Future: this CTA will open the signup + payment flow (portal phase). */}
               <a
                 href={`tel:${SITE.phone}`}
-                className="mt-4 rounded-md bg-[var(--brand)] px-4 py-2 text-center font-semibold text-[var(--brand-contrast)] hover:bg-[var(--brand-dark)]"
+                className="mt-4 rounded-lg bg-[var(--brand)] px-4 py-2 text-center font-semibold text-[var(--brand-contrast)] hover:bg-[var(--brand-dark)]"
               >
                 Reserve
               </a>
@@ -89,7 +89,7 @@ export default function RentalPage() {
           <p className="opacity-90">Call us and we&apos;ll help you find the right fit.</p>
           <a
             href={`tel:${SITE.phone}`}
-            className="mt-2 rounded-md bg-[var(--brand-contrast)] px-6 py-3 font-semibold text-[var(--brand)] hover:opacity-90"
+            className="mt-2 rounded-lg bg-[var(--brand-contrast)] px-6 py-3 font-semibold text-[var(--brand)] hover:opacity-90"
           >
             Call {SITE.phoneDisplay}
           </a>
