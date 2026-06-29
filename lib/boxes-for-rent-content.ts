@@ -14,6 +14,7 @@
  */
 import {
   MEDIA,
+  HERO,
   BOX_SIZES,
   HOW_IT_WORKS,
   SERVICES,
@@ -23,6 +24,14 @@ import {
   TESTIMONIALS,
   FINAL_CTA,
 } from "./content";
+
+/**
+ * Hero background video — the SAME muted looping YouTube clip used in the
+ * home-page header (single source: HERO.videoId). It's a fixed design element of
+ * the hero, not CMS-editable copy, so it lives as a constant rather than on the
+ * overlaid `bfr_hero` content row (a saved row without this field can't blank it).
+ */
+export const BFR_HERO_VIDEO_ID = HERO.videoId;
 
 export type BfrFeature = { title: string; body: string };
 

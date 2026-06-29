@@ -27,6 +27,20 @@ investigating a break (then use the Investigation block). Never log secrets.
 
 ---
 
+## 2026-06-29 17:39 — /boxes-for-rent hero: reuse the home-header background video
+- Intent: place the home-page header video into the new Boxes For Rent hero.
+- Changed:
+  - `lib/boxes-for-rent-content.ts` — export `BFR_HERO_VIDEO_ID = HERO.videoId`
+    (single source shared with the home header; kept as a constant, not on the
+    CMS-overlaid `bfr_hero` row, so a saved row can't blank it).
+  - `components/bfr/BfrHero.tsx` — layer the same muted/looping YouTube embed used
+    by `components/Hero.tsx` into the top background region; existing
+    `backgroundImage` now serves as the poster/fallback beneath it (region gets
+    `overflow-hidden`). Same iframe idiom/classes as the home hero.
+- Notes: video is decorative (aria-hidden, pointer-events-none, tabIndex -1), so
+  no a11y/keyboard regression. Not CMS-editable by design — matches the home hero.
+  tsc clean.
+
 ## 2026-06-29 06:54 — /boxes-for-rent: zoomed per-section QA (component ledger)
 - Intent: redo fidelity QA per-section at zoom (no full-page judging), measuring
   colors with Pillow. Caught defects the earlier passes missed.
