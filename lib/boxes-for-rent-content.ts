@@ -208,7 +208,7 @@ export const BFR_STORY: BfrStory = {
   eyebrow: STORY.eyebrow,
   heading: STORY.heading,
   body: STORY.body,
-  ctaLabel: STORY.cta.label,
+  ctaLabel: "LEARN MORE", // Figma story CTA (vs the home page's "Discover more")
   ctaHref: STORY.cta.href,
   image: STORY.image,
   imageAlt: STORY.heading,

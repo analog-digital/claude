@@ -27,6 +27,28 @@ investigating a break (then use the Investigation block). Never log secrets.
 
 ---
 
+## 2026-06-29 06:38 — /boxes-for-rent: fixes from owner's annotated review
+- Intent: the prior QA pass missed several real defects the owner annotated on
+  screenshots; fix them (the skill's Phase 9 relationship/treatment checks).
+- Fixed:
+  · Hero (PAR1/PAR2/B1) — the features panel was an INVENTED separate dark
+    (#034047) block with different padding; Figma has ONE bright-teal field
+    (#009B9F) holding both columns. Rebuilt so both columns share the same teal
+    bg + same 21/31px padding, no dead gap, and the panel overhangs ~72px into the
+    white section below the hero photo (was flush).
+  · Box cards (PAR4/PAR5) — removed the extra dark-teal frame and our duplicate
+    dots/stars/pricing/badge overlays; the composed WP image now fills the card
+    column edge-to-edge (pricing/dims/dots are baked into that image).
+  · FAQ +/- buttons (C3) — were teal, now orange (#FF7D00).
+  · Story CTA (C3/content) — was teal "Discover more", now orange "LEARN MORE".
+- Verified @1440: T1/T2 0, body #000, 1 orange only, faq+story orange, hero cols
+  share bg+padding, overhang 72px, card frame 0px, H2 all-caps, 4 gallery btns.
+- Content/asset TODOs (not faked): real hero background photo (currently the logo
+  graphic); partner logos are desaturated/white-on-transparent and read "off" on
+  the white tiles → need proper colored logo assets (A2); gallery URLs (// TODO).
+  Note: the floating orange "A" badge in the review screenshots is NOT in our DOM
+  (grep-clean) — it's a browser-extension overlay on the reviewer's side (INT1 n/a).
+
 ## 2026-06-29 06:24 — /boxes-for-rent figma-fidelity-qa pass (skill-driven)
 - Intent: run the figma-fidelity-qa protocol vs Figma 75:10, per-section render diff,
   fix every red gate.

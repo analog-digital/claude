@@ -13,7 +13,7 @@ export function BfrStory({ data }: { data: BfrStoryData }) {
         {data.ctaHref && (
           <Link
             href={data.ctaHref}
-            className="mt-8 inline-block rounded-lg bg-[var(--color-primary)] px-6 py-3 font-semibold text-white hover:bg-[var(--color-primary-dark)]"
+            className="mt-8 inline-block rounded-lg bg-[var(--color-accent)] px-6 py-3 font-semibold text-white hover:opacity-90"
           >
             {data.ctaLabel}
           </Link>

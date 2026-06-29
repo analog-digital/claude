@@ -29,7 +29,7 @@ export function BfrFaq({ heading, faqs }: { heading: string; faqs: { q: string; 
                   {f.q}
                   <span
                     aria-hidden="true"
-                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[var(--color-primary)] text-lg text-white"
+                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[var(--color-accent)] text-lg text-white"
                   >
                     {isOpen ? "−" : "+"}
                   </span>

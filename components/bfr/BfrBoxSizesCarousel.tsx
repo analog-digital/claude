@@ -5,62 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 import type { BfrBoxSizes, BfrBoxCard } from "@/lib/boxes-for-rent-content";
 
-/** Star rating as real SVG icons (Figma stars are flagged [IMAGE], annotation
- *  209:178). Renders nothing when no rating is set (gap field). */
-function StarRating({ rating }: { rating: string }) {
-  const value = parseFloat(rating);
-  if (!rating || Number.isNaN(value)) return null;
-  const full = Math.round(value);
-  return (
-    <span className="flex items-center gap-0.5" aria-label={`Rated ${rating} out of 5`}>
-      {Array.from({ length: 5 }, (_, i) => (
-        <svg key={i} viewBox="0 0 20 20" className="h-4 w-4" fill={i < full ? "var(--color-accent)" : "var(--color-white)"} aria-hidden="true">
-          <path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9 4.7 17.6l1-5.8L1.5 7.7l5.9-.9z" />
-        </svg>
-      ))}
-    </span>
-  );
-}
-
-/** One availability dot (filled = supported), white-ringed for contrast on the image. */
-function AvailDot({ filled, color }: { filled: boolean; color: string }) {
-  return (
-    <span
-      className="inline-block h-3.5 w-3.5 rounded-full ring-2 ring-white"
-      style={filled ? { background: color } : { background: "transparent", boxShadow: `inset 0 0 0 2px ${color}` }}
-      aria-hidden="true"
-    />
-  );
-}
-
 function Card({ card }: { card: BfrBoxCard }) {
   return (
     <article className="flex w-[300px] shrink-0 snap-start flex-col sm:w-[360px]">
-      {/* Teal card panel (Figma 75:14 = --color-primary-medium, radius 5px) */}
-      <div data-card-bg className="relative h-[226px] rounded-[5px] bg-[var(--color-primary-medium)] p-4 text-white">
-        <div className="flex items-start justify-between">
-          {card.pricing ? <p className="text-xl font-extrabold">{card.pricing}</p> : <span />}
-          {card.availabilityBadge && (
-            <span className="rounded bg-white px-2 py-1 text-xs font-semibold text-[var(--color-primary-dark)]">
-              {card.availabilityBadge}
-            </span>
-          )}
-        </div>
-
-        <div className="relative mx-auto mt-1 h-[150px] w-full">
-          <Image src={card.image} alt={card.imageAlt} fill sizes="360px" className="object-contain" />
-          {/* Availability dots — inside the card image (annotation: keep dots here + legend) */}
-          <div className="absolute bottom-1 right-1 flex items-center gap-1.5">
-            <AvailDot filled={card.availableMobile} color="var(--color-primary)" />
-            <AvailDot filled={card.availableDaily} color="var(--color-accent)" />
-          </div>
-          <div className="absolute bottom-1 left-1">
-            <StarRating rating={card.rating} />
-          </div>
-        </div>
+      {/* Full-bleed composed image fills the card column (Figma 75:14, radius 5px).
+          Pricing / availability / dimensions / dots / stars are baked into the
+          source image, so we don't overlay our own (avoids the duplicate dots and
+          the extra dark-teal frame). --color-primary-medium sits behind in case of
+          transparency. */}
+      <div data-card-bg className="overflow-hidden rounded-[5px] bg-[var(--color-primary-medium)]">
+        <Image src={card.image} alt={card.imageAlt} width={720} height={407} className="block h-auto w-full object-cover" />
       </div>
 
-      {/* Below the panel (page surface) */}
+      {/* Below the image (page surface) */}
       <div className="px-1 pt-3">
         <h3 className="text-lg font-semibold text-[var(--color-text)]">{card.sizeLabel}</h3>
         {card.dimensions && <p className="text-sm text-[var(--color-text)]">{card.dimensions}</p>}
