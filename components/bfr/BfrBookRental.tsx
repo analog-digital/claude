@@ -28,7 +28,9 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
         <p className="mt-3 text-white/90">{data.subHeading}</p>
 
         {/* Step badges */}
-        {/* Figma step states: 1 = active (dark), 2 = light aqua, 3/4 = muted. */}
+        {/* Figma step states: 1 = active (dark), 2 = light aqua, 3/4 = muted.
+            Step One sits flush on the dark selector frame below (square bottom),
+            so its active tab merges into the frame (Figma BoxSelector/Container). */}
         <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {data.stepBadges.map((b, i) => {
             const state =
@@ -37,8 +39,10 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
                 : i === 1
                   ? "bg-[var(--color-primary-light)] text-[var(--color-primary-dark)]"
                   : "bg-white/10 text-white/70";
+            // Active tab keeps square bottom corners so it joins the dark frame.
+            const rounding = i === 0 ? "rounded-t-lg" : "rounded-lg";
             return (
-              <li key={b.num} className={`rounded-lg px-4 py-3 ${state}`}>
+              <li key={b.num} className={`${rounding} px-4 py-3 ${state}`}>
                 <span className="block text-sm font-bold">{b.num}</span>
                 <span className="block text-sm">{b.text}</span>
               </li>
@@ -46,8 +50,11 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
           })}
         </ol>
 
-        {/* Selector */}
-        <div className="mt-8 rounded-lg bg-white p-6 text-[var(--color-text)] md:p-8">
+        {/* Selector — white card inside a dark-aqua frame attached to the step
+            badges above (Figma 75:54 primary-dark, bottom corners rounded, ~19px
+            inset to the white inner card 75:55). */}
+        <div className="rounded-b-[10px] bg-[var(--color-primary-dark)] p-[19px]">
+        <div className="rounded-lg bg-white p-6 text-[var(--color-text)] md:p-8">
           <h3 className="text-xl font-bold">{data.selectorHeading}</h3>
 
           <fieldset className="mt-5">
@@ -102,6 +109,7 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
               {data.callUsLabel}
             </a>
           </div>
+        </div>
         </div>
       </div>
     </section>

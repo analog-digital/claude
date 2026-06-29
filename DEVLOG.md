@@ -27,6 +27,25 @@ investigating a break (then use the Investigation block). Never log secrets.
 
 ---
 
+## 2026-06-29 17:52 — /boxes-for-rent: hero centering, link-button text, selector frame, final CTA bg
+- Intent: a batch of Figma-fidelity fixes flagged from live screenshots.
+- Changed:
+  - `components/bfr/BfrHero.tsx` — `mx-auto` so the teal hero panel is centered.
+  - `app/globals.css` — moved the bare `a { color: inherit }` into `@layer base`.
+    Unlayered, it beat every Tailwind text-color utility, so link buttons
+    (CALL US TODAY / REQUEST A QUOTE / BOOK A RENTAL) rendered black instead of
+    white. In the base layer the utilities win again.
+  - `components/bfr/BfrBookRental.tsx` — wrapped the white selector card in a
+    dark-aqua (primary-dark) frame with rounded bottom corners + ~19px inset, and
+    gave Step One a square bottom so its active tab merges into the frame
+    (matches Figma BoxSelector/Container 75:54 + Inner 75:55, badges row flush).
+  - `components/bfr/BfrFinalCta.tsx` + content — final CTA base is now
+    primary-dark (was bright primary) with an optional background photo + dark
+    wash, per Figma 75:49 (container photo under a dark teal overlay).
+- Notes: the exact Figma container photo for the final CTA isn't sourced yet —
+  `backgroundImage` defaults to "" with a TODO; the section shows the design's
+  solid dark-teal wash until the real photo is added. tsc clean.
+
 ## 2026-06-29 17:39 — /boxes-for-rent hero: reuse the home-header background video
 - Intent: place the home-page header video into the new Boxes For Rent hero.
 - Changed:

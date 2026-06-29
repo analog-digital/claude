@@ -128,7 +128,16 @@ export type BfrTestimonials = {
   reviewsUrl: string;
 };
 
-export type BfrFinalCta = { heading: string; body: string; ctaLabel: string; ctaHref: string };
+export type BfrFinalCta = {
+  heading: string;
+  body: string;
+  ctaLabel: string;
+  ctaHref: string;
+  /** Optional background photo behind the dark-teal overlay (Figma 75:49: a
+   *  storage-container scene under a primary-dark wash). Empty → solid dark teal. */
+  backgroundImage: string;
+  backgroundAlt: string;
+};
 
 export const BFR_HERO: BfrHero = {
   heading: "Storage Rentals in Chilliwack and Beyond",
@@ -244,6 +253,10 @@ export const BFR_FINAL_CTA: BfrFinalCta = {
   body: FINAL_CTA.body,
   ctaLabel: FINAL_CTA.cta.label,
   ctaHref: FINAL_CTA.cta.href,
+  // TODO(content): add the real storage-container photo (Figma 75:49 background).
+  // Empty for now → the section renders the solid primary-dark wash from the design.
+  backgroundImage: "",
+  backgroundAlt: "Box It Up storage containers",
 };
 
 /** Typed shape of the whole page's content (saved overrides overlay these). */
