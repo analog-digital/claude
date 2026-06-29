@@ -22,8 +22,8 @@ export function AdminNav() {
             href={t.href}
             className={`-mb-px border-b-2 px-3 py-2.5 text-sm font-medium transition-colors ${
               active
-                ? "border-[var(--brand)] text-[var(--brand)]"
-                : "border-transparent text-[var(--muted-foreground)] hover:text-[var(--brand)]"
+                ? "border-[var(--color-primary)] text-[var(--color-primary)]"
+                : "border-transparent text-[var(--color-text)] hover:text-[var(--color-primary)]"
             }`}
           >
             {t.label}

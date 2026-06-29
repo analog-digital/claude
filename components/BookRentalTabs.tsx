@@ -24,8 +24,8 @@ export function BookRentalTabs({ bookSteps }: { bookSteps: Content["book_steps"]
               onClick={() => setActive(i)}
               className={`rounded-lg border px-4 py-3 text-left text-sm transition-colors ${
                 selected
-                  ? "border-[var(--brand)] bg-[var(--brand)] text-white"
-                  : "border-[var(--border)] bg-white hover:border-[var(--brand)]"
+                  ? "border-[var(--color-primary)] bg-[var(--color-primary)] text-white"
+                  : "border-[var(--color-surface)] bg-white hover:border-[var(--color-primary)]"
               }`}
             >
               <span className="block font-semibold">{s.tab}</span>
@@ -36,15 +36,15 @@ export function BookRentalTabs({ bookSteps }: { bookSteps: Content["book_steps"]
       </div>
 
       {/* Active panel */}
-      <div role="tabpanel" className="mt-8 grid items-center gap-8 rounded-lg bg-[var(--muted)] p-6 md:grid-cols-2 md:p-10">
+      <div role="tabpanel" className="mt-8 grid items-center gap-8 rounded-lg bg-[var(--color-surface)] p-6 md:grid-cols-2 md:p-10">
         <div>
           <h3 className="text-2xl font-bold">{step.title}</h3>
-          <p className="mt-3 text-[var(--muted-foreground)]">{step.body}</p>
+          <p className="mt-3 text-[var(--color-text)]">{step.body}</p>
           <div className="mt-6 flex flex-wrap gap-4">
-            <Link href={SITE.inquireUrl} className="rounded-lg bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--accent-dark)]">
+            <Link href={SITE.inquireUrl} className="rounded-lg bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90">
               REQUEST A QUOTE
             </Link>
-            <a href={`tel:${SITE.phone}`} className="rounded-lg border border-[var(--brand)] px-6 py-3 text-sm font-semibold text-[var(--brand)] hover:bg-[var(--brand)]/10">
+            <a href={`tel:${SITE.phone}`} className="rounded-lg border border-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10">
               CALL US TODAY
             </a>
           </div>

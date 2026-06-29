@@ -27,6 +27,28 @@ investigating a break (then use the Investigation block). Never log secrets.
 
 ---
 
+## 2026-06-29 01:44 — /boxes-for-rent fidelity protocol: one-palette migration + defect fixes
+- Intent: pass a numeric fidelity gate set (tokens/color-role/components/spacing) vs
+  Figma 75:10, measured not eyeballed.
+- Changed (site-wide, per the token contract "delete and repoint every consumer"):
+  · globals.css — deleted the parallel --brand*/--accent*/--foreground/--muted*/--border
+    palette and the @theme alias block; one canonical --color-* layer remains.
+  · Repointed ALL consumers (home/rental/admin/shared header+footer/bfr) to --color-*
+    via mechanical migration (65×--brand, 54×--muted-foreground, etc. → canonical).
+    Consequence: home & /rental-new now render on the canonical Figma palette
+    (brighter primary teal, #000 body text) — flagged for review.
+  · Box card bg → --color-primary-medium #008A8C (Figma 75:14). VIEW GALLERY on all
+    4 cards (gallery URLs are // TODO). Carousel arrows → white filled circles centered
+    on the card row (were teal outline below). Dots moved inside the card image.
+  · Gutter unified to 72px (content max-width 1296) on every section + header + footer.
+    Variable vertical rhythm restored (hero→box 145, hiw→services 147, 35 into the
+    teal band) instead of flat py-16.
+- QA gates @1440 (all green except content TODOs): T1=0 T2=0 T3=8/8 T4=#000 T5=0 ·
+  C1=#008A8C C2=1 orange · P1=4 P2=centered P3=0 · Ty1 40px/800/upper · S1=72 S2=1edge
+  S3=non-uniform(cited 145/147/35) S4=1296 · R1 no overflow @1024/768/375.
+- Content TODOs (not faked): real hero background photo; phone/form URL/FAQ answers/
+  gallery URLs already TODO.
+
 ## 2026-06-27 19:53 — /boxes-for-rent pixel-fidelity pass vs Figma
 - Intent: bring the page to pixel-fidelity with the Figma (node 75:10) at 1440px;
   fix token/cascade/weight/casing/layout divergences found in an audit.

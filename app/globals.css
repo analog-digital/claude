@@ -1,82 +1,10 @@
 @import "tailwindcss";
 
 /*
- * BRAND DESIGN TOKENS — extracted from the live boxitupstorage.ca Elementor
- * global kit (wp-content/uploads/elementor/css/post-100.css). Colors and
- * typography mirror the kit's --e-global-* variables:
- *   primary/secondary text  #1E3238   brand teal            #034047
- *   teal mid                #056D71   teal accent           #07989C
- *   teal light              #64CCC5   teal pale bg          #E7FBF9
- *   accent orange           #FE8506   accent orange light   #FFAB54
- *   light section bg        #F3F3F4   border                #DCDCDE
- * The kit's brand typeface is FuturaPT (a geometric sans, not actually
- * web-loaded on the live site); we use Jost — the closest free Google Fonts
- * equivalent — for both headings and body, weight 700 headings / 400 body.
- * Dominant corner radius across cards & buttons is 8px.
- */
-:root {
-  --background: #ffffff;
-  --foreground: #1e3238;     /* primary dark teal-charcoal (headings/body) */
-
-  --brand: #034047;          /* primary brand teal (dark sections) */
-  --brand-dark: #022f34;     /* hover / pressed */
-  --brand-mid: #056d71;      /* mid teal */
-  --brand-accent: #07989c;   /* teal accent */
-  --brand-light: #64ccc5;    /* light teal */
-  --brand-pale: #e7fbf9;     /* pale teal section background */
-  --brand-contrast: #ffffff;
-
-  --accent: #fe8506;         /* brand orange */
-  --accent-dark: #e5760a;    /* hover / pressed */
-  --accent-light: #ffab54;   /* light orange */
-
-  --muted: #f3f3f4;          /* light section background */
-  --muted-foreground: #5b6470;
-  --border: #dcdcde;
-
-  --radius: 8px;             /* dominant card/button radius */
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-brand: var(--brand);
-  --color-brand-dark: var(--brand-dark);
-  --color-brand-mid: var(--brand-mid);
-  --color-brand-accent: var(--brand-accent);
-  --color-brand-light: var(--brand-light);
-  --color-brand-pale: var(--brand-pale);
-  --color-brand-contrast: var(--brand-contrast);
-  --color-accent: var(--accent);
-  --color-accent-dark: var(--accent-dark);
-  --color-accent-light: var(--accent-light);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
-  --radius-brand: var(--radius);
-  --font-sans: var(--font-sans);
-  --font-heading: var(--font-sans);
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), "Futura PT", "Century Gothic", Arial, sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-sans), "Futura PT", "Century Gothic", Arial, sans-serif;
-  font-weight: 700;
-}
-
-a { color: inherit; }
-
-/*
- * Canonical Figma design tokens — DEV CONTEXT node 212:26, confirmed verbatim
- * via get_variable_defs. Single source of truth for the /boxes-for-rent page.
- * The home & /rental-new pages keep their own WordPress-matched palette above
- * (intentionally different brand colours, out of scope here); these tokens are
- * consumed only within `.theme-bfr`, so those pages are unaffected.
+ * CANONICAL DESIGN TOKENS — the single palette for the whole site.
+ * Values are verbatim from the Figma DEV CONTEXT (node 212:26), confirmed via
+ * get_variable_defs. There is no parallel brand/accent/foreground/muted/border
+ * layer any more: every consumer references these canonical tokens directly.
  */
 :root {
   --color-primary:        #009b9f;
@@ -89,27 +17,27 @@ a { color: inherit; }
   --color-surface:        #ededed;
 }
 
-/*
- * /boxes-for-rent page scope. Body text defaults to --color-text (#000) per
- * Figma; heading weights follow the Futura→weight map (Heavy=800, Demi=600,
- * Book=400). Components reference the --color-* tokens directly.
- */
-.theme-bfr {
+body {
+  background: var(--color-white);
   color: var(--color-text);
+  font-family: var(--font-sans), "Futura PT", "Century Gothic", Arial, sans-serif;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans), "Futura PT", "Century Gothic", Arial, sans-serif;
+  font-weight: 700;
+}
+
+a { color: inherit; }
+
+/*
+ * /boxes-for-rent page scope. Heading weights follow the Futura→weight map from
+ * the DEV CONTEXT note (Heavy=800, Demi=600, Book=400).
+ */
 .theme-bfr h1,
 .theme-bfr h2 {
   font-weight: 800;
 }
 .theme-bfr h3 {
   font-weight: 600;
-}
-/*
- * The <body> is shared (root layout) and carries the site default text colour.
- * Scope it to --color-text (#000) only on pages that render .theme-bfr, so the
- * boxes-for-rent page computes pure black per Figma while other pages keep their
- * WordPress-matched text colour.
- */
-body:has(.theme-bfr) {
-  color: var(--color-text);
 }

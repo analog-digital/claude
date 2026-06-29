@@ -32,7 +32,7 @@ export default async function BoxesForRentPage() {
   const c = await getBoxesForRentContent();
 
   return (
-    <div className="theme-bfr bg-white text-[var(--foreground)]">
+    <div className="theme-bfr bg-white text-[var(--color-text)]">
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", path: "/" },

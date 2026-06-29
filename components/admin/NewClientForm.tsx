@@ -4,7 +4,7 @@ import { useActionState, useState } from "react";
 import { createClientAction, type FormState } from "@/app/admin/actions";
 
 const inputCls =
-  "mt-1 w-full rounded-lg border border-[var(--border)] bg-white px-3 py-2 text-sm focus:border-[var(--brand)] focus:outline-none";
+  "mt-1 w-full rounded-lg border border-[var(--color-surface)] bg-white px-3 py-2 text-sm focus:border-[var(--color-primary)] focus:outline-none";
 
 export function NewClientForm({ plans, boxSizes }: { plans: string[]; boxSizes: string[] }) {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ export function NewClientForm({ plans, boxSizes }: { plans: string[]; boxSizes: 
     return (
       <button
         onClick={() => setOpen(true)}
-        className="rounded-lg bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--brand-dark)]"
+        className="rounded-lg bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-primary-dark)]"
       >
         + Onboard a client
       </button>
@@ -27,7 +27,7 @@ export function NewClientForm({ plans, boxSizes }: { plans: string[]; boxSizes: 
   }
 
   return (
-    <form action={action} className="rounded-lg border border-[var(--border)] bg-white p-5">
+    <form action={action} className="rounded-lg border border-[var(--color-surface)] bg-white p-5">
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block text-sm">
           <span className="font-medium">Name *</span>
@@ -73,7 +73,7 @@ export function NewClientForm({ plans, boxSizes }: { plans: string[]; boxSizes: 
         <textarea name="notes" rows={2} className={inputCls} />
       </label>
 
-      <div className="mt-3 rounded-lg bg-[var(--brand-pale)] p-3 text-xs text-[var(--brand)]">
+      <div className="mt-3 rounded-lg bg-[var(--color-primary-light)] p-3 text-xs text-[var(--color-primary)]">
         💳 Card capture &amp; automatic billing will appear here once Stripe is connected. For now this records the
         client manually; the client starts as <strong>pending</strong>.
       </div>
@@ -84,14 +84,14 @@ export function NewClientForm({ plans, boxSizes }: { plans: string[]; boxSizes: 
         <button
           type="submit"
           disabled={pending}
-          className="rounded-lg bg-[var(--brand)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--brand-dark)] disabled:opacity-60"
+          className="rounded-lg bg-[var(--color-primary)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--color-primary-dark)] disabled:opacity-60"
         >
           {pending ? "Saving…" : "Save client"}
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--muted-foreground)]"
+          className="rounded-lg border border-[var(--color-surface)] px-4 py-2 text-sm font-medium text-[var(--color-text)]"
         >
           Cancel
         </button>

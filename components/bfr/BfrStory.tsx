@@ -4,7 +4,7 @@ import type { BfrStory as BfrStoryData } from "@/lib/boxes-for-rent-content";
 
 export function BfrStory({ data }: { data: BfrStoryData }) {
   return (
-    <section className="mx-auto grid max-w-[1440px] items-center gap-10 px-6 py-16 md:grid-cols-2">
+    <section className="mx-auto grid max-w-[1440px] items-center gap-10 px-6 pb-0 pt-[80px] md:grid-cols-2 lg:px-[72px]">
       <Image src={data.image} alt={data.imageAlt} width={872} height={951} className="w-full rounded-lg object-cover" />
       <div>
         <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-accent)]">{data.eyebrow}</p>

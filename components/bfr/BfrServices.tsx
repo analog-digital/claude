@@ -4,7 +4,7 @@ import type { BfrServices as BfrServicesData } from "@/lib/boxes-for-rent-conten
 
 export function BfrServices({ data }: { data: BfrServicesData }) {
   return (
-    <section className="mx-auto max-w-[1440px] px-6 py-16">
+    <section className="mx-auto max-w-[1440px] px-6 pb-0 pt-[147px] lg:px-[72px]">
       <h2 className="text-[34px] md:text-[50px]">{data.label}</h2>
       <div className="mt-10 grid gap-8 md:grid-cols-3">
         {data.cards.map((c) => (

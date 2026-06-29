@@ -3,8 +3,8 @@ import type { BfrTestimonials as BfrTestimonialsData } from "@/lib/boxes-for-ren
 
 export function BfrTestimonials({ data }: { data: BfrTestimonialsData }) {
   return (
-    <section className="bg-[var(--color-primary-dark)] text-white">
-      <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-6 py-16 lg:grid-cols-2">
+    <section className="mt-[40px] bg-[var(--color-primary-dark)] text-white">
+      <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-6 py-16 lg:grid-cols-2 lg:px-[72px]">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-accent)]">{data.eyebrow}</p>
           <h2 className="mt-2 text-[34px] md:text-[50px]">{data.heading}</h2>

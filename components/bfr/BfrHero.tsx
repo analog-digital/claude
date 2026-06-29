@@ -16,7 +16,7 @@ export function BfrHero({ hero }: { hero: BfrHeroData }) {
       <Image src={hero.backgroundImage} alt={hero.backgroundAlt} fill priority sizes="100vw" className="-z-10 object-cover" />
       <div className="absolute inset-0 -z-10 bg-black/25" aria-hidden="true" />
 
-      <div className="mx-auto flex min-h-[480px] max-w-[1440px] items-end px-6 py-10 md:min-h-[700px] md:py-14">
+      <div className="mx-auto flex min-h-[480px] max-w-[1440px] items-end px-6 pb-0 pt-10 md:min-h-[700px] md:pt-14 lg:px-[72px]">
         <div className="flex w-full flex-col bg-[var(--color-primary)] text-[var(--color-white)] md:flex-row md:items-stretch">
           {/* Heading panel */}
           <div className="flex-1 px-[21px] py-[31px]">

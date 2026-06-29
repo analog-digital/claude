@@ -4,9 +4,9 @@ import type { BfrFinalCta as BfrFinalCtaData } from "@/lib/boxes-for-rent-conten
 export function BfrFinalCta({ data }: { data: BfrFinalCtaData }) {
   return (
     <section className="bg-[var(--color-primary)] text-white">
-      <div className="mx-auto max-w-3xl px-6 py-16 text-center">
-        <h2 className="text-[34px] md:text-[50px]">{data.heading}</h2>
-        <p className="mt-4 text-white/90">{data.body}</p>
+      <div className="mx-auto max-w-[1440px] px-6 py-16 text-center lg:px-[72px]">
+        <h2 className="mx-auto max-w-3xl text-[34px] md:text-[50px]">{data.heading}</h2>
+        <p className="mx-auto mt-4 max-w-3xl text-white/90">{data.body}</p>
         {data.ctaHref && (
           <Link
             href={data.ctaHref}

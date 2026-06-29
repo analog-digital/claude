@@ -14,14 +14,14 @@ export function LoginForm() {
           type="password"
           required
           autoFocus
-          className="mt-1 w-full rounded-lg border border-[var(--border)] px-3 py-2"
+          className="mt-1 w-full rounded-lg border border-[var(--color-surface)] px-3 py-2"
         />
       </label>
       {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-lg bg-[var(--brand)] px-4 py-2.5 font-semibold text-white hover:bg-[var(--brand-dark)] disabled:opacity-60"
+        className="w-full rounded-lg bg-[var(--color-primary)] px-4 py-2.5 font-semibold text-white hover:bg-[var(--color-primary-dark)] disabled:opacity-60"
       >
         {pending ? "Signing in…" : "Sign in"}
       </button>

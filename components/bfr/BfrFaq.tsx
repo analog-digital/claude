@@ -10,8 +10,8 @@ export function BfrFaq({ heading, faqs }: { heading: string; faqs: { q: string; 
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="mx-auto max-w-4xl px-6 py-16">
-      <h2 className="text-center text-[34px] md:text-[50px]">{heading}</h2>
+    <section className="mx-auto max-w-[1440px] px-6 pb-[40px] pt-[80px] lg:px-[72px]">
+      <h2 className="text-[34px] md:text-[50px]">{heading}</h2>
       <div className="mt-10 divide-y divide-[var(--color-surface)] border-y border-[var(--color-surface)]">
         {faqs.map((f, i) => {
           const isOpen = open === i;

@@ -4,7 +4,7 @@ import type { BfrPartners as BfrPartnersData } from "@/lib/boxes-for-rent-conten
 export function BfrPartners({ data }: { data: BfrPartnersData }) {
   return (
     <section className="bg-[var(--color-surface)]">
-      <div className="mx-auto max-w-[1440px] px-6 py-14">
+      <div className="mx-auto max-w-[1440px] px-6 pb-[40px] pt-[80px] lg:px-[72px]">
         <h2 className="text-center text-2xl font-bold">{data.heading}</h2>
         <div className="mt-10 grid grid-cols-2 items-center gap-8 sm:grid-cols-3 md:grid-cols-6">
           {data.logos.map((logo) => (

@@ -30,7 +30,7 @@ function initialAnswers(steps: Step[], sp: URLSearchParams): Record<string, stri
   return out;
 }
 const inputCls =
-  "w-full rounded-lg border border-[var(--border)] bg-white px-4 py-3 text-base focus:border-[var(--brand)] focus:outline-none focus:ring-2 focus:ring-[var(--brand)]/20";
+  "w-full rounded-lg border border-[var(--color-surface)] bg-white px-4 py-3 text-base focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20";
 
 export function QuoteWizard({ form }: { form: Content["quote_form"] }) {
   const steps = useMemo(() => form.steps ?? [], [form.steps]);
@@ -43,7 +43,7 @@ export function QuoteWizard({ form }: { form: Content["quote_form"] }) {
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
 
   if (steps.length === 0) {
-    return <p className="text-[var(--muted-foreground)]">This form has no steps yet.</p>;
+    return <p className="text-[var(--color-text)]">This form has no steps yet.</p>;
   }
 
   const step = steps[index];
@@ -112,13 +112,13 @@ export function QuoteWizard({ form }: { form: Content["quote_form"] }) {
 
   if (status === "done") {
     return (
-      <div className="rounded-lg border border-[var(--brand)] bg-[var(--brand-pale)] p-8 text-center">
-        <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[var(--brand)] text-2xl text-white">✓</div>
-        <h2 className="mt-4 text-2xl font-bold text-[var(--brand)]">{form.successHeading}</h2>
-        <p className="mx-auto mt-2 max-w-md text-[var(--muted-foreground)]">{form.successBody}</p>
+      <div className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-primary-light)] p-8 text-center">
+        <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[var(--color-primary)] text-2xl text-white">✓</div>
+        <h2 className="mt-4 text-2xl font-bold text-[var(--color-primary)]">{form.successHeading}</h2>
+        <p className="mx-auto mt-2 max-w-md text-[var(--color-text)]">{form.successBody}</p>
         <a
           href={`tel:${SITE.phone}`}
-          className="mt-6 inline-block rounded-lg bg-[var(--accent)] px-6 py-3 font-semibold text-white hover:bg-[var(--accent-dark)]"
+          className="mt-6 inline-block rounded-lg bg-[var(--color-accent)] px-6 py-3 font-semibold text-white hover:opacity-90"
         >
           Call {SITE.phoneDisplay}
         </a>
@@ -129,23 +129,23 @@ export function QuoteWizard({ form }: { form: Content["quote_form"] }) {
   const progress = ((index + 1) / steps.length) * 100;
 
   return (
-    <div className="rounded-lg border border-[var(--border)] bg-white p-6 shadow-sm md:p-8">
+    <div className="rounded-lg border border-[var(--color-surface)] bg-white p-6 shadow-sm md:p-8">
       {/* Progress */}
       <div className="mb-6">
-        <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
+        <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-[var(--color-text)]">
           <span>
             Step {index + 1} of {steps.length}
           </span>
           <span>{Math.round(progress)}%</span>
         </div>
-        <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--muted)]">
-          <div className="h-full rounded-full bg-[var(--brand)] transition-all duration-300" style={{ width: `${progress}%` }} />
+        <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-surface)]">
+          <div className="h-full rounded-full bg-[var(--color-primary)] transition-all duration-300" style={{ width: `${progress}%` }} />
         </div>
       </div>
 
       {/* Question */}
       <h2 className="text-xl font-bold md:text-2xl">{step.question}</h2>
-      {step.help && <p className="mt-2 text-sm text-[var(--muted-foreground)]">{step.help}</p>}
+      {step.help && <p className="mt-2 text-sm text-[var(--color-text)]">{step.help}</p>}
 
       <div className="mt-5">
         {step.type === "choice" ? (
@@ -159,8 +159,8 @@ export function QuoteWizard({ form }: { form: Content["quote_form"] }) {
                   onClick={() => chooseOption(opt)}
                   className={`rounded-lg border px-4 py-3 text-left font-medium transition-colors ${
                     selected
-                      ? "border-[var(--brand)] bg-[var(--brand)] text-white"
-                      : "border-[var(--border)] bg-white hover:border-[var(--brand)] hover:bg-[var(--brand-pale)]"
+                      ? "border-[var(--color-primary)] bg-[var(--color-primary)] text-white"
+                      : "border-[var(--color-surface)] bg-white hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-light)]"
                   }`}
                 >
                   {opt}
@@ -206,7 +206,7 @@ export function QuoteWizard({ form }: { form: Content["quote_form"] }) {
           type="button"
           onClick={back}
           disabled={index === 0}
-          className="rounded-lg px-4 py-2 text-sm font-medium text-[var(--muted-foreground)] hover:text-[var(--brand)] disabled:invisible"
+          className="rounded-lg px-4 py-2 text-sm font-medium text-[var(--color-text)] hover:text-[var(--color-primary)] disabled:invisible"
         >
           ← {form.backLabel}
         </button>
@@ -215,7 +215,7 @@ export function QuoteWizard({ form }: { form: Content["quote_form"] }) {
             type="button"
             onClick={submit}
             disabled={status === "sending"}
-            className="rounded-lg bg-[var(--accent)] px-7 py-3 font-semibold text-white hover:bg-[var(--accent-dark)] disabled:opacity-60"
+            className="rounded-lg bg-[var(--color-accent)] px-7 py-3 font-semibold text-white hover:opacity-90 disabled:opacity-60"
           >
             {status === "sending" ? "Sending…" : form.submitLabel}
           </button>
@@ -223,7 +223,7 @@ export function QuoteWizard({ form }: { form: Content["quote_form"] }) {
           <button
             type="button"
             onClick={next}
-            className="rounded-lg bg-[var(--brand)] px-7 py-3 font-semibold text-white hover:bg-[var(--brand-dark)]"
+            className="rounded-lg bg-[var(--color-primary)] px-7 py-3 font-semibold text-white hover:bg-[var(--color-primary-dark)]"
           >
             {form.nextLabel} →
           </button>

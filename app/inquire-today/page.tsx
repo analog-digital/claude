@@ -26,7 +26,7 @@ export default async function InquirePage() {
       />
 
       {/* Header band */}
-      <section className="bg-[var(--brand)] text-white">
+      <section className="bg-[var(--color-primary)] text-white">
         <div className="mx-auto max-w-3xl px-4 py-16 text-center md:py-20">
           <h1 className="text-3xl font-extrabold md:text-5xl">{quote_form.heading}</h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/90">{quote_form.subheading}</p>
@@ -35,7 +35,7 @@ export default async function InquirePage() {
 
       {/* Wizard */}
       <section className="mx-auto -mt-10 max-w-2xl px-4 pb-20">
-        <Suspense fallback={<div className="rounded-lg border border-[var(--border)] bg-white p-8 text-center text-[var(--muted-foreground)]">Loading…</div>}>
+        <Suspense fallback={<div className="rounded-lg border border-[var(--color-surface)] bg-white p-8 text-center text-[var(--color-text)]">Loading…</div>}>
           <QuoteWizard form={quote_form} />
         </Suspense>
       </section>

@@ -14,11 +14,11 @@ export default async function EditSection({ params }: { params: Promise<{ key: s
 
   return (
     <div>
-      <Link href="/admin/content" className="text-sm text-[var(--muted-foreground)] hover:text-[var(--brand)]">
+      <Link href="/admin/content" className="text-sm text-[var(--color-text)] hover:text-[var(--color-primary)]">
         ← Back to content
       </Link>
       <h1 className="mt-2 text-2xl font-bold">{def.label}</h1>
-      <p className="mt-1 text-sm text-[var(--muted-foreground)]">{def.blurb}</p>
+      <p className="mt-1 text-sm text-[var(--color-text)]">{def.blurb}</p>
 
       <div className="mt-6">
         <SectionEditor sectionKey={key} initial={value as never} />

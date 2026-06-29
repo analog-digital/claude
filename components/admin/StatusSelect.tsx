@@ -25,7 +25,7 @@ export function StatusSelect({
         setStatus(next);
         startTransition(() => action(id, next));
       }}
-      className="rounded-lg border border-[var(--border)] bg-white px-2 py-1 text-xs font-medium capitalize focus:border-[var(--brand)] focus:outline-none disabled:opacity-60"
+      className="rounded-lg border border-[var(--color-surface)] bg-white px-2 py-1 text-xs font-medium capitalize focus:border-[var(--color-primary)] focus:outline-none disabled:opacity-60"
     >
       {options.map((o) => (
         <option key={o} value={o}>

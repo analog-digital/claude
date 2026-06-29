@@ -5,7 +5,7 @@ import type { BfrHowItWorks as BfrHowItWorksData } from "@/lib/boxes-for-rent-co
 
 export function BfrHowItWorks({ data }: { data: BfrHowItWorksData }) {
   return (
-    <section className="mx-auto grid max-w-[1440px] items-center gap-10 px-6 py-16 md:grid-cols-2">
+    <section className="mx-auto grid max-w-[1440px] items-center gap-10 px-6 pb-0 pt-[109px] md:grid-cols-2 lg:px-[72px]">
       <div>
         <h2 className="text-[34px] md:text-[50px]">{data.label}</h2>
         <p className="mt-4 font-semibold">{data.subHeading}</p>

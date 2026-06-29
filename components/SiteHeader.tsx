@@ -21,8 +21,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50">
       {/* Top contact bar */}
-      <div className="bg-[var(--brand)] text-[var(--brand-contrast)] text-sm">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2">
+      <div className="bg-[var(--color-primary)] text-[var(--color-white)] text-sm">
+        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-2 px-6 lg:px-[72px] py-2">
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-1">
             <li>
               <a href={`tel:${SITE.phone}`} className="flex items-center gap-2 hover:opacity-90">
@@ -53,8 +53,8 @@ export function SiteHeader() {
       </div>
 
       {/* Main nav */}
-      <div className="border-b border-[var(--border)] bg-[var(--background)]/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <div className="border-b border-[var(--color-surface)] bg-[var(--color-white)]/95 backdrop-blur">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-6 lg:px-[72px] py-3">
           <Link href="/" aria-label={`${SITE.name} home`} className="shrink-0">
             <Image
               src={SITE.logo.header}
@@ -70,7 +70,7 @@ export function SiteHeader() {
             <ul className="flex items-center gap-7 text-sm font-semibold">
               {NAV.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="hover:text-[var(--brand)] transition-colors">
+                  <Link href={item.href} className="hover:text-[var(--color-primary)] transition-colors">
                     {item.label}
                   </Link>
                 </li>
@@ -80,7 +80,7 @@ export function SiteHeader() {
 
           <Link
             href={SITE.inquireUrl}
-            className="rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--accent-dark)] transition-colors"
+            className="rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition-colors"
           >
             Inquire Today
           </Link>

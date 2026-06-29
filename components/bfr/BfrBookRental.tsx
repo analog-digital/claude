@@ -22,8 +22,8 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
   const quoteHref = `/inquire-today${params.toString() ? `?${params}` : ""}`;
 
   return (
-    <section className="bg-[var(--color-primary)] text-white">
-      <div className="mx-auto max-w-[1440px] px-6 py-16">
+    <section className="mt-[26px] bg-[var(--color-primary)] text-white">
+      <div className="mx-auto max-w-[1440px] px-6 pb-[48px] pt-[35px] lg:px-[72px]">
         <h2 className="text-[34px] md:text-[50px]">{data.heading}</h2>
         <p className="mt-3 text-white/90">{data.subHeading}</p>
 

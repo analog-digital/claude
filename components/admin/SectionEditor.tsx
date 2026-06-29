@@ -23,7 +23,7 @@ function blankLike(v: Json): Json {
 }
 
 const inputCls =
-  "mt-1 w-full rounded-lg border border-[var(--border)] bg-white px-3 py-2 text-sm focus:border-[var(--brand)] focus:outline-none";
+  "mt-1 w-full rounded-lg border border-[var(--color-surface)] bg-white px-3 py-2 text-sm focus:border-[var(--color-primary)] focus:outline-none";
 
 function Field({
   value,
@@ -40,7 +40,7 @@ function Field({
     const long = value.length > 60 || value.includes("\n");
     return (
       <label className="block">
-        {label && <span className="block text-sm font-medium text-[var(--foreground)]">{label}</span>}
+        {label && <span className="block text-sm font-medium text-[var(--color-text)]">{label}</span>}
         {long ? (
           <textarea
             value={value}
@@ -72,7 +72,7 @@ function Field({
   if (typeof value === "boolean") {
     return (
       <label className="flex items-center gap-2 text-sm font-medium">
-        <input type="checkbox" checked={value} onChange={(e) => onChange(e.target.checked)} className="h-4 w-4 accent-[var(--brand)]" />
+        <input type="checkbox" checked={value} onChange={(e) => onChange(e.target.checked)} className="h-4 w-4 accent-[var(--color-primary)]" />
         {label}
       </label>
     );
@@ -81,17 +81,17 @@ function Field({
   if (Array.isArray(value)) {
     const singular = label?.replace(/s$/, "") ?? "Item";
     return (
-      <fieldset className="rounded-lg border border-[var(--border)] p-4">
+      <fieldset className="rounded-lg border border-[var(--color-surface)] p-4">
         {label && (
-          <legend className="px-1 text-sm font-semibold text-[var(--brand)]">
-            {label} <span className="font-normal text-[var(--muted-foreground)]">({value.length})</span>
+          <legend className="px-1 text-sm font-semibold text-[var(--color-primary)]">
+            {label} <span className="font-normal text-[var(--color-text)]">({value.length})</span>
           </legend>
         )}
         <div className="space-y-4">
           {value.map((item, i) => (
-            <div key={i} className="rounded-lg border border-[var(--border)] bg-[var(--muted)] p-3">
+            <div key={i} className="rounded-lg border border-[var(--color-surface)] bg-[var(--color-surface)] p-3">
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
+                <span className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text)]">
                   {singular} {i + 1}
                 </span>
                 <div className="flex gap-2">
@@ -103,7 +103,7 @@ function Field({
                       [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
                       onChange(arr);
                     }}
-                    className="text-xs text-[var(--muted-foreground)] hover:text-[var(--brand)] disabled:opacity-30"
+                    className="text-xs text-[var(--color-text)] hover:text-[var(--color-primary)] disabled:opacity-30"
                   >
                     ↑
                   </button>
@@ -115,7 +115,7 @@ function Field({
                       [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]];
                       onChange(arr);
                     }}
-                    className="text-xs text-[var(--muted-foreground)] hover:text-[var(--brand)] disabled:opacity-30"
+                    className="text-xs text-[var(--color-text)] hover:text-[var(--color-primary)] disabled:opacity-30"
                   >
                     ↓
                   </button>
@@ -143,7 +143,7 @@ function Field({
         <button
           type="button"
           onClick={() => onChange([...value, value.length ? blankLike(value[0]) : ""])}
-          className="mt-3 rounded-lg border border-dashed border-[var(--brand)] px-3 py-1.5 text-sm font-medium text-[var(--brand)] hover:bg-[var(--brand-pale)]"
+          className="mt-3 rounded-lg border border-dashed border-[var(--color-primary)] px-3 py-1.5 text-sm font-medium text-[var(--color-primary)] hover:bg-[var(--color-primary-light)]"
         >
           + Add {singular.toLowerCase()}
         </button>
@@ -154,8 +154,8 @@ function Field({
   if (value && typeof value === "object") {
     const obj = value as Record<string, Json>;
     return (
-      <div className={depth > 0 ? "space-y-4 rounded-lg border border-[var(--border)] p-4" : "space-y-5"}>
-        {label && depth > 0 && <p className="text-sm font-semibold text-[var(--brand)]">{label}</p>}
+      <div className={depth > 0 ? "space-y-4 rounded-lg border border-[var(--color-surface)] p-4" : "space-y-5"}>
+        {label && depth > 0 && <p className="text-sm font-semibold text-[var(--color-primary)]">{label}</p>}
         {Object.keys(obj).map((k) => (
           <Field
             key={k}
@@ -200,28 +200,28 @@ export function SectionEditor({ sectionKey, initial }: { sectionKey: string; ini
 
   return (
     <div>
-      <div className="rounded-lg border border-[var(--border)] bg-white p-6">
+      <div className="rounded-lg border border-[var(--color-surface)] bg-white p-6">
         <Field value={value} depth={0} onChange={setValue} />
       </div>
 
-      <div className="sticky bottom-0 mt-4 flex flex-wrap items-center gap-3 rounded-lg border border-[var(--border)] bg-white/95 p-3 backdrop-blur">
+      <div className="sticky bottom-0 mt-4 flex flex-wrap items-center gap-3 rounded-lg border border-[var(--color-surface)] bg-white/95 p-3 backdrop-blur">
         <button
           type="button"
           onClick={save}
           disabled={saving}
-          className="rounded-lg bg-[var(--brand)] px-5 py-2 font-semibold text-white hover:bg-[var(--brand-dark)] disabled:opacity-60"
+          className="rounded-lg bg-[var(--color-primary)] px-5 py-2 font-semibold text-white hover:bg-[var(--color-primary-dark)] disabled:opacity-60"
         >
           {saving ? "Saving…" : "Save changes"}
         </button>
         <button
           type="button"
           onClick={reset}
-          className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--muted-foreground)] hover:border-red-300 hover:text-red-600"
+          className="rounded-lg border border-[var(--color-surface)] px-4 py-2 text-sm font-medium text-[var(--color-text)] hover:border-red-300 hover:text-red-600"
         >
           Reset to default
         </button>
         {msg && (
-          <span className={`text-sm font-medium ${msg.ok ? "text-[var(--brand)]" : "text-red-600"}`}>{msg.text}</span>
+          <span className={`text-sm font-medium ${msg.ok ? "text-[var(--color-primary)]" : "text-red-600"}`}>{msg.text}</span>
         )}
       </div>
     </div>
