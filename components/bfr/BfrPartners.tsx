@@ -6,15 +6,16 @@ export function BfrPartners({ data }: { data: BfrPartnersData }) {
     <section className="bg-[var(--color-surface)]">
       <div className="mx-auto max-w-[1440px] px-6 pb-[40px] pt-[80px] lg:px-[72px]">
         <h2 className="text-center text-2xl font-bold">{data.heading}</h2>
-        <div className="mt-10 grid grid-cols-2 items-center gap-8 sm:grid-cols-3 md:grid-cols-6">
+        <div className="mt-10 grid grid-cols-2 items-stretch gap-4 sm:grid-cols-3 md:grid-cols-6">
           {data.logos.map((logo) => (
-            <div key={logo.src} className="flex items-center justify-center">
+            // White tile per Figma (logos sit on white, not the grey band) — C4.
+            <div key={logo.src} className="flex items-center justify-center rounded-lg bg-[var(--color-white)] p-4">
               <Image
                 src={logo.src}
                 alt={logo.alt}
                 width={160}
                 height={80}
-                className="h-16 w-auto object-contain opacity-80 transition-opacity hover:opacity-100"
+                className="h-14 w-auto object-contain"
               />
             </div>
           ))}

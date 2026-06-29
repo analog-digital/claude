@@ -37,6 +37,8 @@ a { color: inherit; }
 .theme-bfr h1,
 .theme-bfr h2 {
   font-weight: 800;
+  /* Section labels are all-caps in Figma (75:10); card titles (h3) stay title-case. */
+  text-transform: uppercase;
 }
 .theme-bfr h3 {
   font-weight: 600;

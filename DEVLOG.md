@@ -27,6 +27,23 @@ investigating a break (then use the Investigation block). Never log secrets.
 
 ---
 
+## 2026-06-29 06:24 — /boxes-for-rent figma-fidelity-qa pass (skill-driven)
+- Intent: run the figma-fidelity-qa protocol vs Figma 75:10, per-section render diff,
+  fix every red gate.
+- Method: pulled the Figma render fresh + live section crops at 1440; ran the gate
+  script (computed styles) + Phase 9 relationship/treatment checks.
+- Found & fixed 2 real gates:
+  · TF2 (per-heading casing) — lower section labels ("How It All Began", "Trusted by
+    our happy partners", "Read Our Client Feedback & Reviews", "Box It Up Today") were
+    title-case; Figma section labels are all-caps. Fix: text-transform:uppercase on
+    .theme-bfr h1/h2 (card h3 titles stay title-case). Verified 9/9 h2 now uppercase.
+  · C4 (tile treatment) — partner logos sat directly on the grey band; Figma uses
+    white tiles. Fix: white rounded tiles in BfrPartners. Verified 18/18 tiles white.
+- Everything else green: T1-T5, C1 (#008A8C card), C2 (1 orange), P1-P3, Ty1, S1-S4, R1.
+- Content TODOs (not faked): hero background photo (currently the logo asset, upscaled
+  1.88×); gallery URLs (// TODO); some partner logos are white-on-transparent PNGs that
+  disappear on white tiles → need dark logo variants (asset A2).
+
 ## 2026-06-29 06:08 — Engineering-baseline files set up (2 batches)
 - Intent: install the Claude engineering-baseline kit (8 files) and wire the Figma
   pre/post-build protocols + fidelity-QA skill, per the owner's batches.
