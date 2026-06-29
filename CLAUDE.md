@@ -110,6 +110,11 @@ When building from a Figma file:
   it** — list what's missing and ask. This is the same rule as "don't fake done."
 - Match the breakpoints and responsive rules in the DEV CONTEXT (e.g. desktop 1440,
   tablet 1024/768, mobile 375; cards stack on mobile).
+- **After building, verify fidelity.** Run the protocol in `FIGMA-FIDELITY-QA.md`
+  — the post-build bookend to the gap-scan — before declaring done: pull the Figma
+  render per section, compare side-by-side, enumerate every component (not just the
+  hero/big sections), and report the gate results. Don't report done while a
+  non-TODO gate is red. The `figma-fidelity-qa` skill executes this if installed.
 
 ---
 

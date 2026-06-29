@@ -27,6 +27,24 @@ investigating a break (then use the Investigation block). Never log secrets.
 
 ---
 
+## 2026-06-29 06:08 — Engineering-baseline files set up (2 batches)
+- Intent: install the Claude engineering-baseline kit (8 files) and wire the Figma
+  pre/post-build protocols + fidelity-QA skill, per the owner's batches.
+- Changed / placed:
+  · CLAUDE.md — updated to the newer version (adds §4 "After building, verify
+    fidelity" bullet referencing FIGMA-FIDELITY-QA.md + the figma-fidelity-qa skill).
+    Only delta from prior; no project-specific content lost.
+  · FIGMA-GAP-SCAN.md, FIGMA-FIDELITY-QA.md — added at repo root (were absent).
+  · .claude/skills/figma-fidelity-qa/SKILL.md — added (project-scoped, discoverable).
+  · docs/ENGINEERING-BASELINE.md — the baseline-kit README placed here to AVOID
+    clobbering the existing project README.md (Box It Up Storage).
+  · DEVLOG.md — this entry appended (file already existed; not overwritten).
+- Left untouched (source of truth): GOVERNANCE.md, SECURITY-PRACTICES.md (already
+  populated), README.md (project readme).
+- Notes: incoming GOVERNANCE/SECURITY/DEVLOG copies were blank templates — not
+  merged. Remaining ❓ blanks in the existing GOVERNANCE.md flagged to owner
+  (secret rotation cadences, dependency review cadence). No code/app changes.
+
 ## 2026-06-29 01:44 — /boxes-for-rent fidelity protocol: one-palette migration + defect fixes
 - Intent: pass a numeric fidelity gate set (tokens/color-role/components/spacing) vs
   Figma 75:10, measured not eyeballed.
