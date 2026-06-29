@@ -28,7 +28,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-a { color: inherit; }
+/* Keep in @layer base so text-color utilities (e.g. text-white on link buttons)
+   still win — an unlayered `a` rule would override every layered utility. */
+@layer base {
+  a { color: inherit; }
+}
 
 /*
  * /boxes-for-rent page scope. Heading weights follow the Futura→weight map from
