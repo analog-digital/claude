@@ -28,13 +28,22 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
         <p className="mt-3 text-white/90">{data.subHeading}</p>
 
         {/* Step badges */}
+        {/* Figma step states: 1 = active (dark), 2 = light aqua, 3/4 = muted. */}
         <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {data.stepBadges.map((b) => (
-            <li key={b.num} className="rounded-lg bg-white/10 px-4 py-3">
-              <span className="block text-sm font-bold">{b.num}</span>
-              <span className="block text-sm text-white/85">{b.text}</span>
-            </li>
-          ))}
+          {data.stepBadges.map((b, i) => {
+            const state =
+              i === 0
+                ? "bg-[var(--color-primary-dark)] text-white"
+                : i === 1
+                  ? "bg-[var(--color-primary-light)] text-[var(--color-primary-dark)]"
+                  : "bg-white/10 text-white/70";
+            return (
+              <li key={b.num} className={`rounded-lg px-4 py-3 ${state}`}>
+                <span className="block text-sm font-bold">{b.num}</span>
+                <span className="block text-sm">{b.text}</span>
+              </li>
+            );
+          })}
         </ol>
 
         {/* Selector */}
@@ -88,7 +97,7 @@ export function BfrBookRental({ data }: { data: BfrBookRentalData }) {
             </Link>
             <a
               href={`tel:${SITE.phone}`}
-              className="rounded-lg border border-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10"
+              className="rounded-lg bg-[var(--color-primary-dark)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90"
             >
               {data.callUsLabel}
             </a>

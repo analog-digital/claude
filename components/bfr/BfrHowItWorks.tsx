@@ -23,7 +23,7 @@ export function BfrHowItWorks({ data }: { data: BfrHowItWorksData }) {
           </Link>
           <a
             href={`tel:${SITE.phone}`}
-            className="rounded-lg border border-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10"
+            className="rounded-lg bg-[var(--color-primary-dark)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90"
           >
             {data.callUsLabel}
           </a>

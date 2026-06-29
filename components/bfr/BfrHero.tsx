@@ -38,7 +38,7 @@ export function BfrHero({ hero }: { hero: BfrHeroData }) {
           <div className="flex flex-col md:flex-row md:items-stretch">
             {/* Heading column */}
             <div className="flex-1 px-[21px] py-[31px]">
-              <h1 className="max-w-[527px] text-[32px] uppercase leading-[1.1] md:text-[40px] md:leading-[50px]">
+              <h1 className="max-w-[600px] text-[32px] uppercase leading-[1.1] md:text-[40px] md:leading-[50px]">
                 {hero.heading}
               </h1>
               <p className="mt-5 max-w-[452px] text-base font-normal md:text-[20px]">{hero.subheading}</p>

@@ -63,11 +63,9 @@ export function BfrBoxSizesCarousel({ data }: { data: BfrBoxSizes }) {
 
   return (
     <section className="mx-auto max-w-[1440px] px-6 pb-0 pt-[145px] lg:px-[72px]">
+      {/* Heading is full-width (one line per Figma); legend top-right; description below. */}
       <div className="flex flex-wrap items-start justify-between gap-6">
-        <div className="max-w-2xl">
-          <h2 className="text-[34px] md:text-[50px]">{data.label}</h2>
-          <p className="mt-3 text-[var(--color-text)]">{data.description}</p>
-        </div>
+        <h2 className="text-[34px] md:text-[50px]">{data.label}</h2>
         <ul className="space-y-2">
           {data.legend.map((l) => (
             <li key={l.label} className="flex items-center gap-2 text-sm font-medium">
@@ -77,6 +75,7 @@ export function BfrBoxSizesCarousel({ data }: { data: BfrBoxSizes }) {
           ))}
         </ul>
       </div>
+      <p className="mt-3 max-w-[825px] text-[var(--color-text)]">{data.description}</p>
 
       {/* Carousel: arrows overlay the card row, vertically centered (P2) */}
       <div

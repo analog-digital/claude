@@ -27,6 +27,29 @@ investigating a break (then use the Investigation block). Never log secrets.
 
 ---
 
+## 2026-06-29 06:54 — /boxes-for-rent: zoomed per-section QA (component ledger)
+- Intent: redo fidelity QA per-section at zoom (no full-page judging), measuring
+  colors with Pillow. Caught defects the earlier passes missed.
+- Fixed (Figma-backed, measured):
+  · Services access badge — was solid teal + white text, top-LEFT; Figma is pale
+    aqua #CCE8E8 + dark text, top-RIGHT. Fixed.
+  · Services "LEARN MORE" button — not in Figma services; removed (was invented).
+  · Step badges (Book Rental) — were uniform white/10; Figma has states: step1
+    dark #034047, step2 light #CCE8E8, steps 3/4 muted. Fixed.
+  · CALL US TODAY (How It Works + Book Rental) — was outline teal; Figma is a dark
+    solid (#034047) white-text button. Fixed both.
+  · Hero heading — was wrapping to 3 lines (max-w 527); Figma wraps to 2. Widened.
+  · Box-sizes heading — "OUR BOX SIZES AVAILABLE" was wrapping to 2 lines
+    (max-w-2xl); Figma is 1 line. Removed the constraint.
+- Open MISMATCHes that need assets/content (not faked):
+  · Box card bg measured #b3dcdb (baked into the WP composed images) vs Figma
+    #008A8C — needs card images with the #008A8C background to fully match.
+  · Hero background = the BOX IT UP logo graphic vs Figma's truck/storage photo.
+  · Partner logos desaturated / white-on-transparent (vanish on white tiles) vs
+    Figma's gray/colored variants; partners heading is heavy-black vs Figma light-gray.
+  · Hero feature icon tiles: Figma blank #EDEDED squares; ours add a teal check.
+  · Selector radios: native inputs vs Figma's custom aqua-fill circles (minor).
+
 ## 2026-06-29 06:38 — /boxes-for-rent: fixes from owner's annotated review
 - Intent: the prior QA pass missed several real defects the owner annotated on
   screenshots; fix them (the skill's Phase 9 relationship/treatment checks).

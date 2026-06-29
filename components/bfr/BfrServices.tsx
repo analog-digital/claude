@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { BfrServices as BfrServicesData } from "@/lib/boxes-for-rent-content";
 
 export function BfrServices({ data }: { data: BfrServicesData }) {
@@ -12,7 +11,8 @@ export function BfrServices({ data }: { data: BfrServicesData }) {
             <div className="relative">
               <Image src={c.image} alt={c.imageAlt} width={392} height={291} className="aspect-[4/3] w-full object-cover" />
               {c.accessBadge && (
-                <span className="absolute left-4 top-4 max-w-[70%] rounded bg-[var(--color-primary)] px-3 py-1.5 text-xs font-semibold text-white">
+                // Figma: pale-aqua pill, dark text, top-right.
+                <span className="absolute right-4 top-4 max-w-[70%] rounded bg-[var(--color-primary-light)] px-3 py-1.5 text-xs font-semibold text-[var(--color-primary-dark)]">
                   {c.accessBadge}
                 </span>
               )}
@@ -24,16 +24,7 @@ export function BfrServices({ data }: { data: BfrServicesData }) {
           </article>
         ))}
       </div>
-      {data.learnMoreHref && (
-        <div className="mt-8">
-          <Link
-            href={data.learnMoreHref}
-            className="inline-block rounded-lg bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90"
-          >
-            {data.learnMoreLabel}
-          </Link>
-        </div>
-      )}
+      {/* Figma's services section has no "Learn More" button — removed (was invented). */}
     </section>
   );
 }
